@@ -78,10 +78,9 @@ function playGame()
 
 
     /* Always create a game that uses the gameObject array */
-    let game = new MazeSkeletonCanvasGame();
+    let game = new AvoidMenGame();
 
-    /* Always play the game */
-    game.start();
+   
 
     /* If they are needed, then include any game-specific mouse and keyboard listners */
     document.addEventListener('keydown', function (e)
@@ -104,7 +103,12 @@ function playGame()
         }
     });
 
-    button.addEventListener("click",  function (e) {changeImage(background,"images/background.jpg")});
+    button.addEventListener("click",  function (e) 
+    {
+         /* Always play the game */
+         game.start();
+        changeImage(background,"images/background.jpg")
+    });
 }
   
   

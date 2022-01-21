@@ -3,7 +3,7 @@
 /* The game allows the user to walk a skeleton around a maze.              */
 /* If the skeleton is guided to the maze exit, then a win message appears. */
 
-class MazeSkeletonCanvasGame extends CanvasGame
+class AvoidMenGame extends CanvasGame
 {
     constructor()
     {
