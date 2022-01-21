@@ -5,7 +5,7 @@ class EnemyCharacter extends GameObject
     /* Each gameObject MUST have a constructor() and a render() method.        */
     /* If the object animates, then it must also have an updateState() method. */
 
-    constructor(image, centreX, centreY)
+    constructor(image, number, centreX, centreY)
     {
         super(UPDATE_TIME); /* as this class extends from GameObject, you must always call super() */
 
@@ -14,7 +14,7 @@ class EnemyCharacter extends GameObject
         this.centreY = centreY;
         this.NUMBER_OF_COLUMNS_IN_SPRITE_IMAGE = 9; // the number of rows and columns in the gameObject
         this.NUMBER_OF_ROWS_IN_SPRITE_IMAGE = 4; // the number of rows and columns in the gameObject
-
+        this.number = number;
         this.column = 0;
         this.animationStartDelay = 0;
         this.skeletonImage = skeletonImage;
@@ -34,6 +34,8 @@ class EnemyCharacter extends GameObject
         this.centreY = centreY;
  
         this.SKELETON_SPEED = 1; /* set the skeleton's speed */
+        this.coming_closer_horizontally = true;
+        this.coming_closer_vertically = true;
 
 
 
@@ -44,19 +46,19 @@ class EnemyCharacter extends GameObject
     {
 
         
-      //  console.log(gameObjects[SKELETON].getCentreY())
+        // console.log(gameObjects[SKELETON].getCentreY())
        // console.log(gameObjects[SKELETON].getCentreX())  
 
 
         let height_difference = Math.abs(gameObjects[SKELETON].getCentreY() - this.centreY) 
         let width_difference = Math.abs(gameObjects[SKELETON].getCentreX() - this.centreX)
 
-       // console.log(height_difference)
-        // console.log(width_difference)
+        console.log(height_difference)
+        console.log(width_difference)
 
         if(height_difference > 10 || width_difference > 10)
         {
-            //console.log("nsja")
+          
             if(this.centreY > gameObjects[SKELETON].getCentreY() )
             {
                 this.centreY-=1;
@@ -69,12 +71,20 @@ class EnemyCharacter extends GameObject
 
             if(this.centreX < gameObjects[SKELETON].getCentreX() )
             {
-                this.centreX+=1;
+                if(this.coming_closer_horizontally)
+                {
+                    this.centreX+=1;
+                }
+              
             }
             
             if(this.centreX > gameObjects[SKELETON].getCentreX() )
             {
-                this.centreX -=1; 
+                if(this.coming_closer_horizontally)
+                {
+                    this.centreX -=1; 
+                }
+             
             }
 
         }
@@ -137,6 +147,11 @@ class EnemyCharacter extends GameObject
         this.column = 0;
     }
 
+    getNumber()
+    {
+        return this.number
+    }
+
     getDirection()
     {
         return(this.direction);
@@ -146,6 +161,37 @@ class EnemyCharacter extends GameObject
     {
         return this.centreX;
     }
+    
+    getStartX()
+    {
+        return this.centreX-20;
+    }
+
+    getEndX()
+    {
+        return this.centreX+20;
+    }
+
+    getStartY()
+    {
+        return this.centreY-20;
+    }
+
+    getEndY()
+    {
+        return this.centreY+20;
+    }
+
+    setComingCloserHorizontallyState(value)
+    {
+        this.coming_closer_horizontally = value;
+    }
+
+    setComingCloserVerticallyState(value)
+    {
+        this.coming_closer_vertically = value;
+    }
+
 
     getCentreY()
     {
