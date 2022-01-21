@@ -66,9 +66,33 @@ function refreshElementPosition(elem, x, y)
 
 }
 
-function clearCanvas(x)
+function removeObject(x)
 {
-        
         gameObjects[x].stopAndHide();
    
+}
+
+function hideElement(x)
+{
+    x.style.visibility = "hidden";
+}
+
+function clearScene()
+{
+    for(let i = 0; i<gameObjects.length; i++)
+    {
+        gameObjects[i].stopAndHide();
+    }
+
+    // Hides the body div in the DOM
+    // Should we use this? 
+    //var all = document.getElementsByTagName("*");
+    //hideElement(all[0]);
+
+}
+
+function changeImage(x, sourcePath)
+{
+    x.src = sourcePath;
+
 }

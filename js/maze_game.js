@@ -23,6 +23,8 @@ mazeGrid.src = "images/maze_grid.png";
 
 
 
+
+
 /* Direction that the skeleton is walking */
 /* Note that this matches the row in the gameObject image for the given direction */
 const UP = 0;
@@ -102,7 +104,15 @@ function playGame()
 
     //button.addEventListener("click",  function (e) {refreshElementPosition(button, Math.random()*100,  Math.random()*100)})
 
-    button.addEventListener("click",  function (e) {clearCanvas(SKELETON)});
+    /*
+    button.addEventListener("click",  function (e) {removeObject(SKELETON)});
+    button.addEventListener("click",  function (e) {removeObject(BACKGROUND)});
+    button.addEventListener("click",  function (e) {removeObject(MAZE)});
+    button.addEventListener("click",  function (e) {hideElement(button)});
+
+    */
+    //button.addEventListener("click",  function (e) {clearScene()});
+    button.addEventListener("click",  function (e) {changeImage(background,"images/background.jpg")});
   
     
 }
