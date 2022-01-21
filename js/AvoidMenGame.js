@@ -19,6 +19,41 @@ class AvoidMenGame extends CanvasGame
 
     collisionDetection()
     {
+
+      
+        for(let i = ENEMY_START; i < ENEMY_END; i++)
+        {
+            for(let j = ENEMY_START; j < ENEMY_END; j++)
+            {
+                if(i!==j)
+                {
+                    let horizontal_distance = Math.abs(gameObjects[i].getCentreX() - gameObjects[j].getCentreX()) 
+                    let vertical_distance = Math.abs(gameObjects[i].getCentreY() - gameObjects[j].getCentreY()) 
+    
+                    console.log("Horizontal diff: ", horizontal_distance)
+                    // console.log("vertical_distance: ", vertical_distance)
+                    if(horizontal_distance < 30)
+                    {  
+                        console.log(gameObjects[i].getNumber(), "collision")
+                        gameObjects[i].setComingCloserHorizontallyState(false)
+                    }
+                }
+               
+                // else 
+                // {
+                //     gameObjects[i].setComingCloserHorizontallyState(true)
+                // }
+                // if(vertical_distance < 10)
+                // {
+                //     // console.log("collision")
+                // }
+               
+            }
+        
+          
+        }
+
+
         if (!this.mazeCtx)
         {
             return;

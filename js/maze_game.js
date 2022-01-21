@@ -65,13 +65,19 @@ function playGame()
 
     let spread_width = 0;
     let spread_height = 0;
-
+    let width_difference = 0;
 
     for(let i = ENEMY_START; i < ENEMY_END; i++)
     {
         let random_width_placement = getRndInteger(0, canvas.width)
         let random_height_placement = getRndInteger(-50, 50)
-        gameObjects[i] = new EnemyCharacter(skeletonImage, random_width_placement, random_height_placement);
+        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, random_height_placement);
+        width_difference += 50;
+
+        if(width_difference>canvas.width)
+        {
+            width_difference = 0;
+        }
     }
 
     /* END OF game specific code. */
@@ -110,7 +116,7 @@ function playGame()
         game = new AvoidMenGame()
          /* Always play the game */
         game.start();
-        changeImage(background,"images/background.jpg")
+        changeImage(background,"images/maze_background.png")
     });
 
     
