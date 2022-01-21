@@ -5,7 +5,7 @@
 
 class MazeSkeletonCanvasGame extends CanvasGame
 {
-    constructor(mazeGridImage)
+    constructor()
     {
         super();
 
@@ -14,7 +14,7 @@ class MazeSkeletonCanvasGame extends CanvasGame
         this.mazeCtx = mazeOffscreenCanvas.getContext('2d');
         mazeOffscreenCanvas.width = canvas.width;
         mazeOffscreenCanvas.height = canvas.height;
-        this.mazeCtx.drawImage(mazeGridImage, 0, 0, canvas.width, canvas.height);
+        //this.mazeCtx.drawImage(mazeGridImage, 0, 0, canvas.width, canvas.height);
     }
 
     collisionDetection()

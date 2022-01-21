@@ -5,24 +5,17 @@
 
 
 
-
-
 /******************** Declare game specific global data and functions *****************/
 /* images must be declared as global, so that they will load before the game starts  */
 
 let skeletonImage = new Image();
 skeletonImage.src = "images/skeleton.png";
 
-let background = new Image;
+let background = new Image();
 background.src = "images/maze_background.png";
 
-let mazeGrid = new Image;
-mazeGrid.src = "images/maze_grid.png";
-
-
-
-
-
+let main_background = new Image();
+main_background.src = "images/hidden_objects_main_screen_backgrounds.jpg";
 
 
 /* Direction that the skeleton is walking */
@@ -33,17 +26,19 @@ const DOWN = 2;
 const RIGHT = 3;
 const STOPPED = 4;
 
+
+
 /* The various gameObjects */
 /* These are the positions that each gameObject is held in the gameObjects[] array */
 const BACKGROUND = 0;
 const MAZE = 1;
 const SKELETON = 2;
 const WIN_MESSAGE = 3;
+const ENEMY_START = 4
+const ENEMY_END = 15
+
+const UPDATE_TIME = 50
 /******************* END OF Declare game specific data and functions *****************/
-
-
-
-
 
 
 
@@ -65,15 +60,25 @@ function playGame()
 
 
     gameObjects[BACKGROUND] = new StaticImage(background, 0, 0, canvas.width, canvas.height);
-    gameObjects[MAZE] = new StaticImage(mazeGrid, 0, 0, canvas.width, canvas.height);
-    gameObjects[SKELETON] = new MazeSkeleton(skeletonImage, canvas.width - 70, 80);
+    gameObjects[SKELETON] = new MazeSkeleton(skeletonImage, canvas.width/2, canvas.height/2);
 
+
+    let spread_width = 0;
+    let spread_height = 0;
+
+
+    for(let i = ENEMY_START; i < ENEMY_END; i++)
+    {
+        let random_width_placement = getRndInteger(0, canvas.width)
+        let random_height_placement = getRndInteger(-50, 50)
+        gameObjects[i] = new EnemyCharacter(skeletonImage, random_width_placement, random_height_placement);
+    }
 
     /* END OF game specific code. */
 
 
     /* Always create a game that uses the gameObject array */
-    let game = new MazeSkeletonCanvasGame(mazeGrid);
+    let game = new MazeSkeletonCanvasGame();
 
     /* Always play the game */
     game.start();
@@ -96,23 +101,10 @@ function playGame()
         else if (e.keyCode === 40) // down
         {
             gameObjects[SKELETON].setDirection(DOWN);
-            refreshElementPosition(button, Math.random()*100,  Math.random()*100);
         }
     });
 
-    // Here we handle functions for objects outside the canvas element (everything thats NOT a gameobject)
-
-    //button.addEventListener("click",  function (e) {refreshElementPosition(button, Math.random()*100,  Math.random()*100)})
-
-    /*
-    button.addEventListener("click",  function (e) {removeObject(SKELETON)});
-    button.addEventListener("click",  function (e) {removeObject(BACKGROUND)});
-    button.addEventListener("click",  function (e) {removeObject(MAZE)});
-    button.addEventListener("click",  function (e) {hideElement(button)});
-
-    */
-    //button.addEventListener("click",  function (e) {clearScene()});
     button.addEventListener("click",  function (e) {changeImage(background,"images/background.jpg")});
-  
-    
 }
+  
+  
