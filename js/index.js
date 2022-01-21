@@ -35,7 +35,9 @@ function onAllAssetsLoaded()
     /* This code never changes                        */
     canvas = document.getElementById("gameCanvas");
 
-    button = document.getElementById("btn");
+    //button = document.getElementsByClassName('buttonClass');
+    button = document.getElementById('btn');
+    guide = document.getElementById("guide");
     //console.log(button);
     const BUTTON_X = 100;
     const BUTTON_Y = 150;

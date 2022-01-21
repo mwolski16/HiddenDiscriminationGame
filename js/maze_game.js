@@ -108,9 +108,36 @@ function playGame()
         let back_pic = document.getElementById("main_image")
         back_pic.style.visibility = "hidden"
         game = new AvoidMenGame()
+        buttonArray = document.getElementsByClassName('buttonClass');
+        
+      
+        for(let i = 0; i<buttonArray.length; i++)
+        {
+            tempStyle = buttonArray[i].style;
+            
+            buttonArray[i].style.visibility = "hidden";
+        }
          /* Always play the game */
         game.start();
         changeImage(background,"images/background.jpg")
+    });
+
+    guide.addEventListener("click",  function (e) 
+    {
+        let back_pic = document.getElementById("main_image")
+        back_pic.style.visibility = "hidden"
+        
+
+        game = new AvoidMenGame()
+         /* Always play the game */
+        game.start();
+        changeImage(background,"images/background.jpg")
+    });
+
+    guide.addEventListener("hover",  function (e) 
+    {
+        console.log("hover");
+        //guide.style = "filter: grayscale(100%)";
     });
 
     

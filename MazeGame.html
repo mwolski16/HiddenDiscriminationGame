@@ -38,8 +38,11 @@
     <body>
         <div id="gameContainer"> <!-- having a container will allow us to have a game that includes elements that are outside of the canvas -->
           
-            <img id ="main_image" src="images/hidden_objects_main_screen_backgrounds.jpg" style="width: 500px; height: 500px; position:absolute;">Click Me!</img>
-            <button id ="btn" type="button" style="position: absolute; top: 80px;">Click Me!</button>
+            <img id ="main_image" src="images/hidden_objects_main_screen_backgrounds.jpg" style="width: 500px; height: 500px; position:absolute;"></img>
+            <button id ="btn" class = "buttonClass" type="button" style="position: absolute; top: 80px; opacity: 0.5; height: 100px; width: 100px; left: 150px"></button>
+            <div style="position: absolute; top: 20px; left: 430px" onmouseover='style = "position: absolute; top: 20px; left: 430px; filter: brightness(1.25);";' onmouseout='style = "position: absolute; top: 20px; left: 430px;";'><img src="images/guide.png" id ="guide" style="width: 70px; height: 80px;" ></img></div>
+            <button id ="btn2" class = "buttonClass" type="button" style="position: absolute; top: 280px; opacity: 0.5; height: 100px; width: 100px; left: 250px"></button>
+            <button id ="btn3" class = "buttonClass" type="button" style="position: absolute; top: 400px; left:120px;height:100px; width: 100px; opacity: 0.5; "></button>
             <canvas id="gameCanvas" tabindex="1"></canvas>
 
             <!-- ***************************************************************************** -->
