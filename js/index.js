@@ -11,10 +11,10 @@
 
 /************** Declare data and functions that are needed for all games ************/
 
-/* Always create a canvas and a ctx */
+/* Always create a canvas and a ctx, create elements outside of the canvas (like buttons) here */
 let canvas = null;
 let ctx = null;
-
+let button = null;
 /* Always create an array that holds the default game gameObjects */
 let gameObjects = [];
 
@@ -34,6 +34,14 @@ function onAllAssetsLoaded()
     /* Initialise the canvas and associated variables */
     /* This code never changes                        */
     canvas = document.getElementById("gameCanvas");
+
+    button = document.getElementById("btn");
+    //console.log(button);
+    const BUTTON_X = 100;
+    const BUTTON_Y = 150;
+    //refreshElementPosition(button, BUTTON_X, BUTTON_Y);
+    //button.addEventListener('click', refreshElementPosition(button, Math.random()*100,  Math.random()*100));
+   
     ctx = canvas.getContext("2d");
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
@@ -49,3 +57,18 @@ Math.radians = function (degrees)
 {
     return degrees * Math.PI / 180;
 };
+
+function refreshElementPosition(elem, x, y)
+{
+    
+    elem.style.left = x+"px";
+    elem.style.top = y+"px";
+
+}
+
+function clearCanvas(x)
+{
+        
+        gameObjects[x].stopAndHide();
+   
+}

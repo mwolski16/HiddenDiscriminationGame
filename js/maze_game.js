@@ -20,6 +20,9 @@ let mazeGrid = new Image;
 mazeGrid.src = "images/maze_grid.png";
 
 
+
+
+
 /* Direction that the skeleton is walking */
 /* Note that this matches the row in the gameObject image for the given direction */
 const UP = 0;
@@ -91,6 +94,15 @@ function playGame()
         else if (e.keyCode === 40) // down
         {
             gameObjects[SKELETON].setDirection(DOWN);
+            refreshElementPosition(button, Math.random()*100,  Math.random()*100);
         }
     });
+
+    // Here we handle functions for objects outside the canvas element (everything thats NOT a gameobject)
+
+    //button.addEventListener("click",  function (e) {refreshElementPosition(button, Math.random()*100,  Math.random()*100)})
+
+    button.addEventListener("click",  function (e) {clearCanvas(SKELETON)});
+  
+    
 }

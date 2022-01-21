@@ -57,7 +57,7 @@ class MazeSkeletonCanvasGame extends CanvasGame
                 gameObjects[WIN_MESSAGE] = new StaticText("Well Done!", 20, 280, "Times Roman", 100, "red");
                 gameObjects[WIN_MESSAGE].start(); /* render win message */
             }
-        }
+        }               
         else if (gameObjects[SKELETON].getDirection() === RIGHT)
         {
             let imageData = this.mazeCtx.getImageData(gameObjects[SKELETON].getCentreX(), gameObjects[SKELETON].getCentreY(), 1, 1);
