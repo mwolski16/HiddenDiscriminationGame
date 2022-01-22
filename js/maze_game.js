@@ -35,9 +35,12 @@ const MAZE = 1;
 const SKELETON = 2;
 const WIN_MESSAGE = 3;
 const ENEMY_START = 4
-const ENEMY_END = 15
+const ENEMY_END = 20
 
 const UPDATE_TIME = 50
+var CONFIDENCE_LEVEL = 100;
+
+
 /******************* END OF Declare game specific data and functions *****************/
 
 
@@ -70,7 +73,7 @@ function playGame()
     for(let i = ENEMY_START; i < ENEMY_END; i++)
     {
         let random_width_placement = getRndInteger(0, canvas.width)
-        let random_height_placement = getRndInteger(-50, 50)
+        let random_height_placement = getRndInteger(-50, canvas.height)
         gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, random_height_placement);
         width_difference += 50;
 
