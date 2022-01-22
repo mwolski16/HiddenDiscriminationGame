@@ -213,11 +213,13 @@ function playGame()
     guide.addEventListener("hover",  function (e) 
     {
         ////console.log("hover");
-        let isGuidePageVisible = false;
+        let isGuidePageVisible = true;
+        guide_page.style.visibility = "hidden"
+        console.log(guide_page);
         let guide_page = document.getElementById("guide_page");
         if(isGuidePageVisible == false)
         {
-            //console.log("Guide page should be visible")
+            
             guide_page.style.visibility = "visible"
             isGuidePageVisible = true;
         }
@@ -225,7 +227,7 @@ function playGame()
         {
             guide_page.style.visibility = "hidden"
             isGuidePageVisible = false;
-            ////console.log("Guide page should be invsible")
+            
         }
         //guide.style = "filter: grayscale(100%)";
     });
