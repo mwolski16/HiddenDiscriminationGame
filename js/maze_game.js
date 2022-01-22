@@ -35,14 +35,17 @@ const MAZE = 1;
 const SKELETON = 2;
 const WIN_MESSAGE = 3;
 const ENEMY_START = 4
-const ENEMY_END = 20
+const ENEMY_END = 10
+const ENEMY_END_SECOND = 15
+const ENEMY_END_THIRD = 20
+const ENEMY_END_FOURTH = 25
+const ENEMY_END_FIFTH = 30
+
 
 const UPDATE_TIME = 50
 var CONFIDENCE_LEVEL = 100;
 
-
 /******************* END OF Declare game specific data and functions *****************/
-
 
 
 /* Always have a playGame() function                                     */
@@ -63,26 +66,84 @@ function playGame()
 
 
     gameObjects[BACKGROUND] = new StaticImage(background, 0, 0, canvas.width, canvas.height);
-    gameObjects[SKELETON] = new MazeSkeleton(skeletonImage, canvas.width/2, canvas.height/2);
+    gameObjects[SKELETON] = new MazeSkeleton(skeletonImage, canvas.width/2, canvas.height-50);
 
-
+    let height_placement = 0; 
     let spread_width = 0;
     let spread_height = 0;
     let width_difference = 0;
+    let delay_time = 0;
 
     for(let i = ENEMY_START; i < ENEMY_END; i++)
     {
         let random_width_placement = getRndInteger(0, canvas.width)
-        let random_height_placement = getRndInteger(-50, canvas.height)
-        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, random_height_placement);
-        width_difference += 50;
-
+        let random_height_placement = getRndInteger(canvas.height/2, canvas.height)
+        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, random_height_placement, delay_time);
+        width_difference += 100;
         if(width_difference>canvas.width)
         {
             width_difference = 0;
         }
     }
 
+
+    for(let i = ENEMY_END; i < ENEMY_END_SECOND; i++)
+    {
+        let random_width_placement = getRndInteger(0, canvas.width)
+        height_placement = 0
+        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, height_placement, delay_time);
+        width_difference += 150;
+        height_placement -= 300;
+        delay_time += 1000;
+        if(width_difference>canvas.width)
+        {
+            width_difference = 0;
+        }
+    }
+
+    for(let i = ENEMY_END_SECOND; i < ENEMY_END_THIRD; i++)
+    {
+        let random_width_placement = getRndInteger(0, canvas.width)
+        height_placement = 0
+        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, height_placement, delay_time);
+        width_difference += 50;
+        height_placement -= 300;
+        delay_time += 2000;
+        if(width_difference>canvas.width)
+        {
+            width_difference = 0;
+        }
+    }
+
+    for(let i = ENEMY_END_THIRD; i < ENEMY_END_FOURTH; i++)
+    {
+        let random_width_placement = getRndInteger(0, canvas.width)
+        height_placement = 0
+        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, height_placement, delay_time);
+        width_difference += 50;
+        height_placement -= 300;
+        delay_time += 5000;
+        if(width_difference>canvas.width)
+        {
+            width_difference = 0;
+        }
+    }
+
+     for(let i = ENEMY_END_FOURTH; i < ENEMY_END_FIFTH; i++)
+    {
+        let random_width_placement = getRndInteger(0, canvas.width)
+        height_placement = 0
+        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, height_placement, delay_time);
+        width_difference += 50;
+        height_placement -= 300;
+        delay_time += 5000;
+        if(width_difference>canvas.width)
+        {
+            width_difference = 0;
+        }
+    }
+
+   
     /* END OF game specific code. */
 
 
