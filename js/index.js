@@ -102,3 +102,25 @@ function changeImage(x, sourcePath)
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
   }
+
+function highlight(x)
+{
+    
+    x.style.filter = "brightness(1.25)";
+
+}
+
+function removeHighlight(x)
+{
+    x.style.filter = "brightness(1.0)";
+}
+
+function invertColors(x)
+{
+    x.style.filter = "invert(100%)";
+}
+
+function removeInvertColors(x)
+{
+    x.style.filter = "invert(0%)";
+}

@@ -30,11 +30,11 @@ class AvoidMenGame extends CanvasGame
                     let horizontal_distance = Math.abs(gameObjects[i].getCentreX() - gameObjects[j].getCentreX()) 
                     let vertical_distance = Math.abs(gameObjects[i].getCentreY() - gameObjects[j].getCentreY()) 
     
-                    console.log("Horizontal diff: ", horizontal_distance)
+                   // console.log("Horizontal diff: ", horizontal_distance)
                     // console.log("vertical_distance: ", vertical_distance)
                     if(horizontal_distance < 30)
                     {  
-                        console.log(gameObjects[i].getNumber(), "collision")
+                        //console.log(gameObjects[i].getNumber(), "collision")
                         gameObjects[i].setComingCloserHorizontallyState(false)
                     }
                 }

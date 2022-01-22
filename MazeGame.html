@@ -38,16 +38,17 @@
     <body>
         <div id="gameContainer"> <!-- having a container will allow us to have a game that includes elements that are outside of the canvas -->
           
-            <img id ="main_image" src="images/hidden_objects_main_screen_backgrounds.jpg" style="width: 500px; height: 500px; position:absolute;"></img>
-            <button id ="btn" class = "buttonClass" type="button" style="position: absolute; top: 80px; opacity: 0.5; height: 100px; width: 100px; left: 150px"></button>
-            <div style="position: absolute; top: 20px; left: 430px" onmouseover='style = "position: absolute; top: 20px; left: 430px; filter: brightness(1.25);";' onmouseout='style = "position: absolute; top: 20px; left: 430px;";'><img src="images/guide.png" id ="guide" style="width: 70px; height: 80px;" ></img></div>
-            <button id ="btn2" class = "buttonClass" type="button" style="position: absolute; top: 280px; opacity: 0.5; height: 100px; width: 100px; left: 250px"></button>
-            <button id ="btn3" class = "buttonClass" type="button" style="position: absolute; top: 400px; left:120px;height:100px; width: 100px; opacity: 0.5; "></button>
+            <img id ="main_image" src="images/hidden_objects_main_screen_backgrounds.png" style="width: 500px; height: 500px; position:absolute;"></img>
+            <img id = "btn" class = "buttonClass" src="images/club.png" style="position:absolute; left:420px; top: 433px;" onmouseover=invertColors(this)  onmouseout=removeInvertColors(this)></img>
+            <img id = "guide" class = "buttonClass" src="images/guide.png" style="width: 90px; height: 100px; position:absolute; left:420px; top: 0px;" onmouseover=highlight(this)  onmouseout=removeHighlight(this)></img>
+            <img id = "btn" class = "buttonClass" src="images/school.png" style="position:absolute; left:330px; top: 320px;" onmouseover=highlight(this)  onmouseout=removeHighlight(this)></img>
+            <img id = "btn" class = "buttonClass" src="images/church.png" style="position:absolute; left:115px; top: 380px;" onmouseover=highlight(this)  onmouseout=removeHighlight(this)></img>
+            <img id = "guide_page" src="images/guide_page.png" style="position: absolute; top: 0px; left: 510px;" ></img>
             <canvas id="gameCanvas" tabindex="1"></canvas>
 
             <!-- ***************************************************************************** -->
             <!-- *************** THE CODE BELOW CAN BE DIFFERENT FOR EACH GAME *************** -->
-            <p>Use the arrow keys to change the direction that the skeleton walks.</p>
+            
             <!-- ************************* END OF GAME SPECIFIC CODE ************************* -->
             <!-- ***************************************************************************** -->
 

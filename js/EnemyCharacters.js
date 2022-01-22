@@ -53,8 +53,8 @@ class EnemyCharacter extends GameObject
         let height_difference = Math.abs(gameObjects[SKELETON].getCentreY() - this.centreY) 
         let width_difference = Math.abs(gameObjects[SKELETON].getCentreX() - this.centreX)
 
-        console.log(height_difference)
-        console.log(width_difference)
+        //console.log(height_difference)
+        //console.log(width_difference)
 
         if(height_difference > 10 || width_difference > 10)
         {

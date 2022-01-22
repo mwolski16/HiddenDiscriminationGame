@@ -15,7 +15,9 @@ let background = new Image();
 background.src = "images/maze_background.png";
 
 let main_background = new Image();
-main_background.src = "images/hidden_objects_main_screen_backgrounds.jpg";
+main_background.src = "images/hidden_objects_main_screen_backgrounds.png";
+
+
 
 
 /* Direction that the skeleton is walking */
@@ -130,8 +132,12 @@ function playGame()
 
     guide.addEventListener("click",  function (e) 
     {
+
         let back_pic = document.getElementById("main_image")
         back_pic.style.visibility = "hidden"
+
+        
+
         
 
         game = new AvoidMenGame()
@@ -142,7 +148,21 @@ function playGame()
 
     guide.addEventListener("hover",  function (e) 
     {
-        console.log("hover");
+        ////console.log("hover");
+        let isGuidePageVisible = false;
+        let guide_page = document.getElementById("guide_page");
+        if(isGuidePageVisible == false)
+        {
+            //console.log("Guide page should be visible")
+            guide_page.style.visibility = "visible"
+            isGuidePageVisible = true;
+        }
+        else if(isGuidePageVisible == true)
+        {
+            guide_page.style.visibility = "hidden"
+            isGuidePageVisible = false;
+            ////console.log("Guide page should be invsible")
+        }
         //guide.style = "filter: grayscale(100%)";
     });
 
