@@ -5,9 +5,9 @@ class EnemyCharacter extends GameObject
     /* Each gameObject MUST have a constructor() and a render() method.        */
     /* If the object animates, then it must also have an updateState() method. */
 
-    constructor(image, number, centreX, centreY)
+    constructor(image, number, centreX, centreY, delay)
     {
-        super(UPDATE_TIME); /* as this class extends from GameObject, you must always call super() */
+        super(UPDATE_TIME, delay); /* as this class extends from GameObject, you must always call super() */
 
         /* These variables depend on the object */
         this.centreX = centreX;
@@ -24,7 +24,7 @@ class EnemyCharacter extends GameObject
         this.WIDTH_OF_SKELETON_ON_CANVAS = 100; /* the width and height that the skeleton will take up on the canvas */
         this.HEIGHT_OF_SKELETON_ON_CANVAS = 100;
 
-        this.SKELETON_SPEED = 2;
+        this.SKELETON_SPEED = 0.3;
 
          /* These variables depend on the object */
         this.WIDTH_OF_SKELETON_ON_CANVAS = 50; /* the width and height that the skeleton will take up on the canvas */
@@ -33,7 +33,7 @@ class EnemyCharacter extends GameObject
         this.centreX = centreX; /* set the start position of the skeleton in the maze */
         this.centreY = centreY;
  
-        this.SKELETON_SPEED = 1; /* set the skeleton's speed */
+    
         this.coming_closer_horizontally = true;
         this.coming_closer_vertically = true;
 
@@ -53,27 +53,31 @@ class EnemyCharacter extends GameObject
         let height_difference = Math.abs(gameObjects[SKELETON].getCentreY() - this.centreY) 
         let width_difference = Math.abs(gameObjects[SKELETON].getCentreX() - this.centreX)
 
-        //console.log(height_difference)
-        //console.log(width_difference)
+        // console.log(height_difference)
+        // console.log(width_difference)
 
         if(height_difference > 10 || width_difference > 10)
         {
           
             if(this.centreY > gameObjects[SKELETON].getCentreY() )
             {
-                this.centreY-=1;
+                this.centreY-=this.SKELETON_SPEED;
             }
 
             if(this.centreY < gameObjects[SKELETON].getCentreY() )
             {
-                this.centreY+=1;
+                this.centreY+=this.SKELETON_SPEED;
             }
 
             if(this.centreX < gameObjects[SKELETON].getCentreX() )
             {
                 if(this.coming_closer_horizontally)
                 {
-                    this.centreX+=1;
+                    this.centreX+=this.SKELETON_SPEED;
+                }
+                else 
+                {
+                    this.centreY+=this.SKELETON_SPEED;
                 }
               
             }
@@ -82,7 +86,11 @@ class EnemyCharacter extends GameObject
             {
                 if(this.coming_closer_horizontally)
                 {
-                    this.centreX -=1; 
+                    this.centreX -=this.SKELETON_SPEED; 
+                }
+                else 
+                {
+                    this.centreY+=this.SKELETON_SPEED; 
                 }
              
             }
