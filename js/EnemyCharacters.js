@@ -17,10 +17,10 @@ class EnemyCharacter extends GameObject
         this.number = number;
         this.column = 0;
         this.animationStartDelay = 0;
-        this.skeletonImage = skeletonImage;
+        this.image = image;
 
-        this.SPRITE_WIDTH = (this.skeletonImage.width / this.NUMBER_OF_COLUMNS_IN_SPRITE_IMAGE);
-        this.SPRITE_HEIGHT = (this.skeletonImage.height / this.NUMBER_OF_ROWS_IN_SPRITE_IMAGE);
+        this.SPRITE_WIDTH = (this.image.width / this.NUMBER_OF_COLUMNS_IN_SPRITE_IMAGE);
+        this.SPRITE_HEIGHT = (this.image.height / this.NUMBER_OF_ROWS_IN_SPRITE_IMAGE);
         this.WIDTH_OF_SKELETON_ON_CANVAS = 100; /* the width and height that the skeleton will take up on the canvas */
         this.HEIGHT_OF_SKELETON_ON_CANVAS = 100;
 
@@ -142,7 +142,7 @@ class EnemyCharacter extends GameObject
 
     render()
     {
-        ctx.drawImage(this.skeletonImage, this.column * this.SPRITE_WIDTH, this.row * this.SPRITE_WIDTH, this.SPRITE_WIDTH, this.SPRITE_HEIGHT, this.centreX - (this.SPRITE_WIDTH / 2), this.centreY - (this.SPRITE_HEIGHT / 2), this.WIDTH_OF_SKELETON_ON_CANVAS, this.HEIGHT_OF_SKELETON_ON_CANVAS);
+        ctx.drawImage(this.image, this.column * this.SPRITE_WIDTH, this.row * this.SPRITE_WIDTH, this.SPRITE_WIDTH, this.SPRITE_HEIGHT, this.centreX - (this.SPRITE_WIDTH / 2), this.centreY - (this.SPRITE_HEIGHT / 2), this.WIDTH_OF_SKELETON_ON_CANVAS, this.HEIGHT_OF_SKELETON_ON_CANVAS);
     }
 
     setDirection(newDirection)

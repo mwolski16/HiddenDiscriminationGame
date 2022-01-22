@@ -17,8 +17,11 @@ background.src = "images/maze_background.png";
 let main_background = new Image();
 main_background.src = "images/hidden_objects_main_screen_backgrounds.png";
 
+let woman_character = new Image();
+woman_character.src = "images/GenericWoman1.png";
 
-
+let man_character = new Image();
+man_character.src = "images/GenericMan1.png";
 
 /* Direction that the skeleton is walking */
 /* Note that this matches the row in the gameObject image for the given direction */
@@ -68,7 +71,7 @@ function playGame()
 
 
     gameObjects[BACKGROUND] = new StaticImage(background, 0, 0, canvas.width, canvas.height);
-    gameObjects[SKELETON] = new MazeSkeleton(skeletonImage, canvas.width/2, canvas.height-50);
+    gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-50);
 
     let height_placement = 0; 
     let spread_width = 0;
@@ -80,7 +83,7 @@ function playGame()
     {
         let random_width_placement = getRndInteger(0, canvas.width)
         let random_height_placement = getRndInteger(canvas.height/2, canvas.height)
-        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, random_height_placement, delay_time);
+        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, random_height_placement, delay_time);
         width_difference += 100;
         if(width_difference>canvas.width)
         {
@@ -93,7 +96,7 @@ function playGame()
     {
         let random_width_placement = getRndInteger(0, canvas.width)
         height_placement = 0
-        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, height_placement, delay_time);
+        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
         width_difference += 150;
         height_placement -= 300;
         delay_time += 1000;
@@ -107,7 +110,7 @@ function playGame()
     {
         let random_width_placement = getRndInteger(0, canvas.width)
         height_placement = 0
-        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, height_placement, delay_time);
+        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
         width_difference += 50;
         height_placement -= 300;
         delay_time += 2000;
@@ -121,7 +124,7 @@ function playGame()
     {
         let random_width_placement = getRndInteger(0, canvas.width)
         height_placement = 0
-        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, height_placement, delay_time);
+        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
         width_difference += 50;
         height_placement -= 300;
         delay_time += 5000;
@@ -135,7 +138,7 @@ function playGame()
     {
         let random_width_placement = getRndInteger(0, canvas.width)
         height_placement = 0
-        gameObjects[i] = new EnemyCharacter(skeletonImage, i, width_difference, height_placement, delay_time);
+        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
         width_difference += 50;
         height_placement -= 300;
         delay_time += 5000;
