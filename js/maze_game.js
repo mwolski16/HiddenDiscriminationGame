@@ -12,7 +12,7 @@ let skeletonImage = new Image();
 skeletonImage.src = "images/skeleton.png";
 
 let background = new Image();
-background.src = "images/maze_background.png";
+background.src = "images/nightClubFloor.jpg";
 
 let main_background = new Image();
 main_background.src = "images/hidden_objects_main_screen_backgrounds.png";
@@ -40,15 +40,17 @@ const MAZE = 1;
 const SKELETON = 2;
 const WIN_MESSAGE = 3;
 const REACH_THE_BAR_MSG = 4
-const CONFIDENCE_METER = 5
-const ENEMY_START = 6
-const ENEMY_END = 12
+const ANGELA = 5
+const ANGELA_POPUP = 6
+const CONFIDENCE_METER = 7
+const ENEMY_START = 8
+const ENEMY_END = 14
 const ENEMY_END_SECOND = 17
 const ENEMY_END_THIRD = 21
 const ENEMY_END_FOURTH = 26
 const ENEMY_END_FIFTH = 30
 // 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
-const GENDER = getRndInteger(0,2);
+const GENDER = getRndInteger(0,1);
 //const GENDER = 0;
 
 
@@ -75,9 +77,12 @@ function playGame()
     /* This is game specific code. It will be different for each game, as each game will have it own gameObjects */
 
     console.log(background.height)
-    gameObjects[BACKGROUND] = new BackgroundImage(background, 0, -background.height/2, canvas.width, 1000);
+    gameObjects[BACKGROUND] = new BackgroundImage(background, 0, -background.height/4, canvas.width, 1000);
     gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
     gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
+    gameObjects[ANGELA] = new Angela(woman_character, canvas.width + 20, 200);
+   
+   // gameObjects[ANGELA_POPUP] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
 
     let height_placement = 0; 
     let spread_width = 0;
@@ -245,7 +250,7 @@ function playGame()
         guide_page.style.visibility = "hidden"
          /* Always play the game */
         game.start();
-        changeImage(background,"images/maze_background.png")
+        changeImage(background,"images/nightClubFloor.jpg")
     });
     let isGuidePageVisible = true;
     guide.addEventListener("click",  function (e) 

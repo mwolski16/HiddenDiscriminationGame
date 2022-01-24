@@ -24,7 +24,7 @@ class EnemyCharacter extends GameObject
         this.WIDTH_OF_SKELETON_ON_CANVAS = 100; /* the width and height that the skeleton will take up on the canvas */
         this.HEIGHT_OF_SKELETON_ON_CANVAS = 100;
 
-        this.SKELETON_SPEED = 0.3;
+        this.SKELETON_SPEED = 0.7;
 
          /* These variables depend on the object */
         this.WIDTH_OF_SKELETON_ON_CANVAS = 50; /* the width and height that the skeleton will take up on the canvas */
@@ -52,6 +52,17 @@ class EnemyCharacter extends GameObject
        // console.log(gameObjects[SKELETON].getCentreX())  
 
 
+       if(gameObjects[SKELETON].getDirection() == UP)
+       {
+           this.y+=2
+           
+       }
+       if(gameObjects[SKELETON].getDirection() == DOWN)
+       {
+           this.y-=2
+           
+       }
+
         let height_difference = Math.abs(gameObjects[SKELETON].getCentreY() - this.centreY) 
         let width_difference = Math.abs(gameObjects[SKELETON].getCentreX() - this.centreX)
 
@@ -75,15 +86,17 @@ class EnemyCharacter extends GameObject
         else
         {
             if(height_difference > 10 || width_difference > 10)
-        {
+            {
           
             if(this.centreY > gameObjects[SKELETON].getCentreY() )
             {
                 this.centreY-=this.SKELETON_SPEED;
+                // this.setDirection(UP)  
             }
 
             if(this.centreY < gameObjects[SKELETON].getCentreY() )
             {
+                //this.setDirection(DOWN)  
                 this.centreY+=this.SKELETON_SPEED;
             }
 
@@ -91,11 +104,13 @@ class EnemyCharacter extends GameObject
             {
                 if(this.coming_closer_horizontally)
                 {
-                    this.centreX+=this.SKELETON_SPEED;
+                    //this.setDirection(RIGHT)  
+                   this.centreX+=this.SKELETON_SPEED;
                 }
                 else 
                 {
-                    this.centreY+=this.SKELETON_SPEED;
+                   // this.setDirection(DOWN)  
+                   this.centreY+=this.SKELETON_SPEED;
                 }
               
             }
@@ -104,16 +119,18 @@ class EnemyCharacter extends GameObject
             {
                 if(this.coming_closer_horizontally)
                 {
-                    this.centreX -=this.SKELETON_SPEED; 
+                    //this.setDirection(LEFT)  
+                   this.centreX -=this.SKELETON_SPEED; 
                 }
                 else 
                 {
+                    //this.setDirection(DOWN)  
                     this.centreY+=this.SKELETON_SPEED; 
                 }
              
             }
 
-        }
+            }
 
         }
         

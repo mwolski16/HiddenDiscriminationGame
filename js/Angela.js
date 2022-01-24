@@ -1,6 +1,6 @@
 /* Author: Derek O Reilly, Dundalk Institute of Technology, Ireland. */
 
-class Skeleton extends GameObject
+class Angela extends GameObject
 {
     /* Each gameObject MUST have a constructor() and a render() method.        */
     /* If the object animates, then it must also have an updateState() method. */
@@ -19,6 +19,7 @@ class Skeleton extends GameObject
         this.animationStartDelay = 0;
         this.skeletonImage = skeletonImage;
 
+        this.direction = STOPPED
         this.SPRITE_WIDTH = (this.skeletonImage.width / this.NUMBER_OF_COLUMNS_IN_SPRITE_IMAGE);
         this.SPRITE_HEIGHT = (this.skeletonImage.height / this.NUMBER_OF_ROWS_IN_SPRITE_IMAGE);
         this.WIDTH_OF_SKELETON_ON_CANVAS = 100; /* the width and height that the skeleton will take up on the canvas */
@@ -26,43 +27,59 @@ class Skeleton extends GameObject
 
         this.SKELETON_SPEED = 2;
         this.setDirection(STOPPED);
+
+         /* These variables depend on the object */
+         this.WIDTH_OF_SKELETON_ON_CANVAS = 50; /* the width and height that the skeleton will take up on the canvas */
+         this.HEIGHT_OF_SKELETON_ON_CANVAS = 50;
+        
+        this.come_to_character = false
+        this.rescue_character = false  
+        
     }
 
     updateState()
     {
 
-        if(this.centreX - 15 < 0) 
+        let height_difference = Math.abs(gameObjects[SKELETON].getCentreY() - this.centreY) 
+        let width_difference = Math.abs(gameObjects[SKELETON].getCentreX() - this.centreX)
+
+        if(height_difference < 30 && width_difference < 30)
         {
-            this.setDirection(RIGHT)  
+           
+            this.come_to_character = false;
+            this.setDirection(STOPPED); 
         }
-        if(this.centreX + 15 > canvas.width) 
-        {
-            this.setDirection(LEFT)  
-        }
-        if(this.centreY + 15 > canvas.height) 
-        {
-            this.setDirection(UP)  
-        }
-        if(this.centreX - 15 < -background.height) 
-        {
-            this.setDirection(DOWN)  
-        }
-        if (this.direction === UP)
-        {
-            this.centreY -= this.SKELETON_SPEED;
-        }
-        else if (this.direction === LEFT)
-        {
-            this.centreX -= this.SKELETON_SPEED;
-        }
-        else if (this.direction === DOWN)
-        {
-            this.centreY += this.SKELETON_SPEED;
-        }
-        else if (this.direction === RIGHT)
-        {
-            this.centreX += this.SKELETON_SPEED;
-        }
+
+       else if(this.come_to_character)
+       {
+        
+            this.setDirection(LEFT); 
+
+            if(this.centreY > gameObjects[SKELETON].getCentreY() )
+            {
+                this.centreY-=this.SKELETON_SPEED; 
+            }
+
+            if(this.centreY < gameObjects[SKELETON].getCentreY() )
+            {
+            
+                this.centreY+=this.SKELETON_SPEED;
+            }
+
+            if(this.centreX < gameObjects[SKELETON].getCentreX() )
+            {
+                this.centreX+=this.SKELETON_SPEED;
+            }
+            
+            if(this.centreX > gameObjects[SKELETON].getCentreX() )
+            {
+                this.centreX -= this.SKELETON_SPEED; 
+            }
+       }
+       else if(this.rescue_character)
+       {
+            this.setDirection(RIGHT); 
+       }
 
         if (this.direction !== STOPPED)
         {
@@ -118,5 +135,10 @@ class Skeleton extends GameObject
     getCentreY()
     {
         return this.centreY;
+    }
+
+    goToCharacter(value)
+    {
+        this.come_to_character = value
     }
 }

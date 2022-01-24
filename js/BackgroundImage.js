@@ -19,11 +19,19 @@ class BackgroundImage extends GameObject
 
     updateState()
     {
-     
-        if(gameObjects[SKELETON].getDirection() == UP)
+        if(this.y<=0)
         {
-            this.y+=1
+            if(gameObjects[SKELETON].getDirection() == UP)
+            {
+                this.y+=2
+            }
+            if(gameObjects[SKELETON].getDirection() == DOWN)
+            {
+                this.y-=2
+            }
         }
+     
+       
     }
 
     render()

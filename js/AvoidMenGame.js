@@ -3,6 +3,8 @@
 /* The game allows the user to walk a skeleton around a maze.              */
 /* If the skeleton is guided to the maze exit, then a win message appears. */
 
+CALL_FOR_ANGELA_NUMBER = getRndInteger(500, 600)
+
 class AvoidMenGame extends CanvasGame
 {
     constructor()
@@ -14,13 +16,45 @@ class AvoidMenGame extends CanvasGame
         this.mazeCtx = mazeOffscreenCanvas.getContext('2d');
         mazeOffscreenCanvas.width = canvas.width;
         mazeOffscreenCanvas.height = canvas.height;
+      
         //this.mazeCtx.drawImage(mazeGridImage, 0, 0, canvas.width, canvas.height);
+        
     }
 
     collisionDetection()
     {
 
-      
+        if(CONFIDENCE_LEVEL<=CALL_FOR_ANGELA_NUMBER)
+        {
+            for(let i = ENEMY_START; i<ENEMY_END_FIFTH; i++)
+            {
+                gameObjects[i].stop()
+            }
+
+            gameObjects[ANGELA].goToCharacter(true)
+            gameObjects[SKELETON].stop()
+            gameObjects[BACKGROUND].stop()
+        
+            CONFIDENCE_LEVEL + 10;
+        } 
+
+        else 
+        {
+            for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i++)
+            {
+                let horizontal_distance = Math.abs(gameObjects[SKELETON].getCentreX() - gameObjects[i].getCentreX()) 
+                let vertical_distance = Math.abs(gameObjects[SKELETON].getCentreY() - gameObjects[i].getCentreY()) 
+    
+                if(horizontal_distance < 20 && vertical_distance < 35)
+                {  
+                    //console.log(gameObjects[i].getNumber(), "collision")
+                    CONFIDENCE_LEVEL -=1;
+                }
+            
+            }
+        }
+        
+
         for(let i = ENEMY_START; i < ENEMY_END; i++)
         {
             for(let j = ENEMY_START; j < ENEMY_END; j++)
@@ -52,18 +86,7 @@ class AvoidMenGame extends CanvasGame
     
         }
 
-        for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i++)
-        {
-            let horizontal_distance = Math.abs(gameObjects[SKELETON].getCentreX() - gameObjects[i].getCentreX()) 
-            let vertical_distance = Math.abs(gameObjects[SKELETON].getCentreY() - gameObjects[i].getCentreY()) 
-
-            if(horizontal_distance < 20 && vertical_distance < 35)
-            {  
-                //console.log(gameObjects[i].getNumber(), "collision")
-                CONFIDENCE_LEVEL -=1;
-            }
-        
-        }
+       
                    
 
         if (!this.mazeCtx)
