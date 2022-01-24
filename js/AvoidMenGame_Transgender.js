@@ -38,6 +38,20 @@ class AvoidMenGame_Transgender extends CanvasGame
                         gameObjects[i].setComingCloserHorizontallyState(false)
                     }
                 }
+
+
+                for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i++)
+                {
+                    let horizontal_distance = Math.abs(gameObjects[SKELETON].getCentreX() - gameObjects[i].getCentreX()) 
+                    let vertical_distance = Math.abs(gameObjects[SKELETON].getCentreY() - gameObjects[i].getCentreY()) 
+        
+                    if(horizontal_distance < 20 && vertical_distance < 35)
+                    {  
+                        //console.log(gameObjects[i].getNumber(), "collision")
+                        CONFIDENCE_LEVEL -=1;
+                    }
+                
+                }
                
                 // else 
                 // {

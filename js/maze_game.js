@@ -23,6 +23,9 @@ woman_character.src = "images/GenericWoman1.png";
 let man_character = new Image();
 man_character.src = "images/GenericMan1.png";
 
+let popup_background = new Image();
+popup_background.src = "images/speechBubble.png";
+
 /* Direction that the skeleton is walking */
 /* Note that this matches the row in the gameObject image for the given direction */
 const UP = 0;
@@ -49,6 +52,7 @@ const ENEMY_END_SECOND = 17
 const ENEMY_END_THIRD = 21
 const ENEMY_END_FOURTH = 26
 const ENEMY_END_FIFTH = 30
+const POPUP = 31; 
 // 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
 const GENDER = getRndInteger(0,1);
 //const GENDER = 0;
@@ -84,6 +88,12 @@ function playGame()
    
    // gameObjects[ANGELA_POPUP] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
 
+    //go to the bar popup
+    let gttb_popup_x = 200;
+    let gttb_popup_y = 50;
+    gameObjects[POPUP] = new PopUp("Go to the bar!", gttb_popup_x, gttb_popup_y, "Roboto Thin", 18, "White", 20, "green", popup_background, gttb_popup_x-15, gttb_popup_y-25, 130,40);
+
+    
     let height_placement = 0; 
     let spread_width = 0;
     let spread_height = 0;
@@ -251,6 +261,8 @@ function playGame()
          /* Always play the game */
         game.start();
         changeImage(background,"images/nightClubFloor.jpg")
+        //set the dissaperance of the popups
+        setTimeout('gameObjects[POPUP].changePos(-200,-200)', 1000);
     });
     let isGuidePageVisible = true;
     guide.addEventListener("click",  function (e) 
