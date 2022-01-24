@@ -196,43 +196,52 @@ function playGame()
         game.start();
         changeImage(background,"images/maze_background.png")
     });
-
+    let isGuidePageVisible = true;
     guide.addEventListener("click",  function (e) 
     {
 
-        let back_pic = document.getElementById("main_image")
-        back_pic.style.visibility = "hidden"
+        //let back_pic = document.getElementById("main_image")
+        //back_pic.style.visibility = "hidden"
+
+        ////console.log("hover");
+        let guide_page = document.getElementById("guide_page");
+        //let isGuidePageVisible = true;
+        guide_page.style.visibility = "hidden"
+        console.log(guide_page);
+        //console.log("isGuidePageVisible == false?: " + toString(isGuidePageVisible == false))
+        console.log(isGuidePageVisible == false)
+        
+        if(isGuidePageVisible == false)
+        {
+            //console.log("showing guide page");
+            guide_page.style.visibility = "visible"
+            isGuidePageVisible = true;
+            //console.log("isGuidePageVisible: " + isGuidePageVisible);
+        }
+        else //if(isGuidePageVisible == true)
+        {
+            
+            //console.log("hiding guide page");
+            guide_page.style.visibility = "hidden"
+            isGuidePageVisible = false;
+           // console.log("isGuidePageVisible: " + isGuidePageVisible);
+            
+        }
+        //guide.style = "filter: grayscale(100%)";
 
         
 
         
 
-        game = new AvoidMenGame()
-         /* Always play the game */
-        game.start();
-        changeImage(background,"images/background.jpg")
+    //     game = new AvoidMenGame()
+    //      /* Always play the game */
+    //     game.start();
+    //     changeImage(background,"images/background.jpg")
     });
 
     guide.addEventListener("hover",  function (e) 
     {
-        ////console.log("hover");
-        let isGuidePageVisible = true;
-        guide_page.style.visibility = "hidden"
-        console.log(guide_page);
-        let guide_page = document.getElementById("guide_page");
-        if(isGuidePageVisible == false)
-        {
-            
-            guide_page.style.visibility = "visible"
-            isGuidePageVisible = true;
-        }
-        else if(isGuidePageVisible == true)
-        {
-            guide_page.style.visibility = "hidden"
-            isGuidePageVisible = false;
-            
-        }
-        //guide.style = "filter: grayscale(100%)";
+        
     });
 
     
