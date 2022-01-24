@@ -39,11 +39,13 @@ const BACKGROUND = 0;
 const MAZE = 1;
 const SKELETON = 2;
 const WIN_MESSAGE = 3;
-const ENEMY_START = 4
-const ENEMY_END = 10
-const ENEMY_END_SECOND = 15
-const ENEMY_END_THIRD = 20
-const ENEMY_END_FOURTH = 25
+const REACH_THE_BAR_MSG = 4
+const CONFIDENCE_METER = 5
+const ENEMY_START = 6
+const ENEMY_END = 12
+const ENEMY_END_SECOND = 17
+const ENEMY_END_THIRD = 21
+const ENEMY_END_FOURTH = 26
 const ENEMY_END_FIFTH = 30
 // 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
 const GENDER = getRndInteger(0,2);
@@ -51,7 +53,7 @@ const GENDER = getRndInteger(0,2);
 
 
 const UPDATE_TIME = 50
-var CONFIDENCE_LEVEL = 100;
+var CONFIDENCE_LEVEL = 1000;
 
 /******************* END OF Declare game specific data and functions *****************/
 
@@ -72,9 +74,10 @@ function playGame()
     /* Create the various gameObjects for this game. */
     /* This is game specific code. It will be different for each game, as each game will have it own gameObjects */
 
-    
-    gameObjects[BACKGROUND] = new StaticImage(background, 0, 0, canvas.width, canvas.height);
-    gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-50);
+    console.log(background.height)
+    gameObjects[BACKGROUND] = new BackgroundImage(background, 0, -background.height/2, canvas.width, 1000);
+    gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
+    gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
 
     let height_placement = 0; 
     let spread_width = 0;
@@ -100,14 +103,23 @@ function playGame()
         for(let i = ENEMY_END; i < ENEMY_END_SECOND; i++)
         {
             let random_width_placement = getRndInteger(0, canvas.width)
-            height_placement = 0
+            height_placement = 150
             gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
             width_difference += 150;
             height_placement -= 300;
-            delay_time += 1000;
+        
             if(width_difference>canvas.width)
             {
-                width_difference = 0;
+                let random_width_placement = getRndInteger(0, canvas.width)
+                height_placement = 0
+                gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+                width_difference += 150;
+                height_placement -= 300;
+                delay_time += 1000;
+                if(width_difference>canvas.width)
+                {
+                    width_difference = 0;
+                }
             }
         }
 
@@ -167,6 +179,7 @@ function playGame()
 
 
     }
+
     else 
     {
         //do smth

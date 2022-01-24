@@ -30,6 +30,23 @@ class Skeleton extends GameObject
 
     updateState()
     {
+
+        if(this.centreX - 15 < 0) 
+        {
+            this.setDirection(RIGHT)  
+        }
+        if(this.centreX + 15 > canvas.width) 
+        {
+            this.setDirection(LEFT)  
+        }
+        if(this.centreY + 15 > canvas.height) 
+        {
+            this.setDirection(UP)  
+        }
+        if(this.centreX - 15 < -background.height) 
+        {
+            this.setDirection(DOWN)  
+        }
         if (this.direction === UP)
         {
             this.centreY -= this.SKELETON_SPEED;
