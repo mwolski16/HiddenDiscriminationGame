@@ -45,6 +45,9 @@ const ENEMY_END_SECOND = 15
 const ENEMY_END_THIRD = 20
 const ENEMY_END_FOURTH = 25
 const ENEMY_END_FIFTH = 30
+// 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
+const GENDER = getRndInteger(0,2);
+//const GENDER = 0;
 
 
 const UPDATE_TIME = 50
@@ -69,7 +72,7 @@ function playGame()
     /* Create the various gameObjects for this game. */
     /* This is game specific code. It will be different for each game, as each game will have it own gameObjects */
 
-
+    
     gameObjects[BACKGROUND] = new StaticImage(background, 0, 0, canvas.width, canvas.height);
     gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-50);
 
@@ -78,74 +81,95 @@ function playGame()
     let spread_height = 0;
     let width_difference = 0;
     let delay_time = 0;
-
-    for(let i = ENEMY_START; i < ENEMY_END; i++)
+    
+    if(GENDER == 1)
     {
-        let random_width_placement = getRndInteger(0, canvas.width)
-        let random_height_placement = getRndInteger(canvas.height/2, canvas.height)
-        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, random_height_placement, delay_time);
-        width_difference += 100;
-        if(width_difference>canvas.width)
+        for(let i = ENEMY_START; i < ENEMY_END; i++)
         {
-            width_difference = 0;
+            let random_width_placement = getRndInteger(0, canvas.width)
+            let random_height_placement = getRndInteger(canvas.height/2, canvas.height)
+            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, random_height_placement, delay_time);
+            width_difference += 100;
+            if(width_difference>canvas.width)
+            {
+                width_difference = 0;
+            }
         }
+
+
+        for(let i = ENEMY_END; i < ENEMY_END_SECOND; i++)
+        {
+            let random_width_placement = getRndInteger(0, canvas.width)
+            height_placement = 0
+            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+            width_difference += 150;
+            height_placement -= 300;
+            delay_time += 1000;
+            if(width_difference>canvas.width)
+            {
+                width_difference = 0;
+            }
+        }
+
+        for(let i = ENEMY_END_SECOND; i < ENEMY_END_THIRD; i++)
+        {
+            let random_width_placement = getRndInteger(0, canvas.width)
+            height_placement = 0
+            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+            width_difference += 50;
+            height_placement -= 300;
+            delay_time += 2000;
+            if(width_difference>canvas.width)
+            {
+                width_difference = 0;
+            }
+        }
+
+        for(let i = ENEMY_END_THIRD; i < ENEMY_END_FOURTH; i++)
+        {
+            let random_width_placement = getRndInteger(0, canvas.width)
+            height_placement = 0
+            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+            width_difference += 50;
+            height_placement -= 300;
+            delay_time += 5000;
+            if(width_difference>canvas.width)
+            {
+                width_difference = 0;
+            }
+        }
+
+        for(let i = ENEMY_END_FOURTH; i < ENEMY_END_FIFTH; i++)
+        {
+            let random_width_placement = getRndInteger(0, canvas.width)
+            height_placement = 0
+            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+            width_difference += 50;
+            height_placement -= 300;
+            delay_time += 5000;
+            if(width_difference>canvas.width)
+            {
+                width_difference = 0;
+            }
+        }
+    }   
+    else if(GENDER == 0)
+    {
+        
+        for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i++)
+        {
+            let width_placement = getRndChoice(getRndInteger(10,250), getRndInteger(300,400));
+            let height_placement = i+getRndInteger(10,400);
+            console.log("Spawning character")
+            gameObjects[i] = new EnemyCharacter(man_character, i, width_placement, height_placement, 0);
+            
+        }
+
+
     }
-
-
-    for(let i = ENEMY_END; i < ENEMY_END_SECOND; i++)
+    else 
     {
-        let random_width_placement = getRndInteger(0, canvas.width)
-        height_placement = 0
-        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
-        width_difference += 150;
-        height_placement -= 300;
-        delay_time += 1000;
-        if(width_difference>canvas.width)
-        {
-            width_difference = 0;
-        }
-    }
-
-    for(let i = ENEMY_END_SECOND; i < ENEMY_END_THIRD; i++)
-    {
-        let random_width_placement = getRndInteger(0, canvas.width)
-        height_placement = 0
-        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
-        width_difference += 50;
-        height_placement -= 300;
-        delay_time += 2000;
-        if(width_difference>canvas.width)
-        {
-            width_difference = 0;
-        }
-    }
-
-    for(let i = ENEMY_END_THIRD; i < ENEMY_END_FOURTH; i++)
-    {
-        let random_width_placement = getRndInteger(0, canvas.width)
-        height_placement = 0
-        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
-        width_difference += 50;
-        height_placement -= 300;
-        delay_time += 5000;
-        if(width_difference>canvas.width)
-        {
-            width_difference = 0;
-        }
-    }
-
-     for(let i = ENEMY_END_FOURTH; i < ENEMY_END_FIFTH; i++)
-    {
-        let random_width_placement = getRndInteger(0, canvas.width)
-        height_placement = 0
-        gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
-        width_difference += 50;
-        height_placement -= 300;
-        delay_time += 5000;
-        if(width_difference>canvas.width)
-        {
-            width_difference = 0;
-        }
+        //do smth
     }
 
    
@@ -181,8 +205,21 @@ function playGame()
     button.addEventListener("click",  function (e) 
     {
         let back_pic = document.getElementById("main_image")
-        back_pic.style.visibility = "hidden"
-        game = new AvoidMenGame()
+        back_pic.style.visibility = "hidden";
+        console.log(GENDER)
+        if(GENDER == 0)
+        {
+            game = new AvoidMenGame_Man();
+        }
+        else if(GENDER == 1)
+        {
+            game = new AvoidMenGame();
+        }
+        else
+        {
+            game = new AvoidMenGame_Transgender();
+        }
+        //game = new AvoidMenGame()
         buttonArray = document.getElementsByClassName('buttonClass');
         
       
@@ -192,6 +229,7 @@ function playGame()
             
             buttonArray[i].style.visibility = "hidden";
         }
+        guide_page.style.visibility = "hidden"
          /* Always play the game */
         game.start();
         changeImage(background,"images/maze_background.png")

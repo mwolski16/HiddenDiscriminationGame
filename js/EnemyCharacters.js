@@ -37,6 +37,8 @@ class EnemyCharacter extends GameObject
         this.coming_closer_horizontally = true;
         this.coming_closer_vertically = true;
 
+        this.isGoingDown = false;
+
 
 
         this.setDirection(STOPPED);
@@ -55,8 +57,24 @@ class EnemyCharacter extends GameObject
 
         // console.log(height_difference)
         // console.log(width_difference)
-
-        if(height_difference > 10 || width_difference > 10)
+        //console.log(this.isGoingDown);
+        if(this.isGoingDown)
+        {
+            this.centreY+= getRndInteger(0.5,1); 
+            //this.centreY+= getRndInteger(5,10); 
+            //console.log("I should be going down");
+            //console.log(this.getCentreY());
+            if(this.getCentreY() > canvas.height+50)
+            {
+                this.setCharacterY(-10);
+                this.setCharacterX(getRndChoice(getRndInteger(10,250), getRndInteger(300,400)));
+                console.log("Putting the character at the top")
+            }
+            
+        }
+        else
+        {
+            if(height_difference > 10 || width_difference > 10)
         {
           
             if(this.centreY > gameObjects[SKELETON].getCentreY() )
@@ -97,6 +115,8 @@ class EnemyCharacter extends GameObject
 
         }
 
+        }
+        
         if (this.direction === UP)
         {
             this.centreY -= this.SKELETON_SPEED;
@@ -204,5 +224,25 @@ class EnemyCharacter extends GameObject
     getCentreY()
     {
         return this.centreY;
+    }
+
+    setSpeed(speed)
+    {
+        this.SKELETON_SPEED = speed;
+    }
+
+    setCharacterX(pos)
+    {
+        this.centreX = pos;
+    }
+
+    setCharacterY(pos)
+    {
+        this.centreY = pos;
+    }
+
+    setGoingDownState(x)
+    {
+        this.isGoingDown = x;
     }
 }

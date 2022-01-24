@@ -100,8 +100,22 @@ function changeImage(x, sourcePath)
 }
 
 function getRndInteger(min, max) {
+    // min - inclusive, max - inclusive
     return Math.floor(Math.random() * (max - min + 1) ) + min;
   }
+
+function getRndChoice(x, y)
+{
+    let choice = getRndInteger(0,1);
+    if(choice == 0)
+    {
+        return x;
+    }
+    else
+    {
+        return y;
+    }
+}
 
 function highlight(x)
 {
