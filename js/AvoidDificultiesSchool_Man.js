@@ -21,7 +21,6 @@ class SchoolGame_Woman extends CanvasGame
 
     collisionDetection()
     {
-
-      
+        
     }
 }

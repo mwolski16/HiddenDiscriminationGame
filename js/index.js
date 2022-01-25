@@ -83,6 +83,7 @@ function onAllAssetsLoaded()
         game.start();
         changeImage(background,"images/nightClubFloor.jpg")
 
+
         //set the dissaperance of the popup
         setTimeout('gameObjects[POPUP].changePos(-200,-200)', 5000);
     });

@@ -109,53 +109,7 @@ class AvoidMenGame extends CanvasGame
        
                    
 
-        if (!this.mazeCtx)
-        {
-            return;
-        }
-        if (gameObjects[SKELETON].getDirection() === UP)
-        {
-            let imageData = this.mazeCtx.getImageData(gameObjects[SKELETON].getCentreX(), gameObjects[SKELETON].getCentreY() - 20, 1, 1);
-            if (imageData.data[3] !== 0)
-            {
-                gameObjects[SKELETON].setDirection(DOWN);
-            }
-        }
-        else if (gameObjects[SKELETON].getDirection() === LEFT)
-        {
-            let imageData = this.mazeCtx.getImageData(gameObjects[SKELETON].getCentreX() - 15, gameObjects[SKELETON].getCentreY(), 1, 1);
-            if (imageData.data[3] !== 0)
-            {
-                gameObjects[SKELETON].setDirection(RIGHT);
-            }
-        }
-        else if (gameObjects[SKELETON].getDirection() === DOWN)
-        {
-            let imageData = this.mazeCtx.getImageData(gameObjects[SKELETON].getCentreX(), gameObjects[SKELETON].getCentreY() + 15, 1, 1);
-            if (imageData.data[3] !== 0)
-            {
-                gameObjects[SKELETON].setDirection(UP);
-            }
-
-            if (gameObjects[SKELETON].getCentreY() > canvas.height)
-            {
-                /* Player has won */
-                for (let i = 0; i < gameObjects.length; i++) /* stop all gameObjects from animating */
-                {
-                    gameObjects[i].stop();
-                }
-                gameObjects[WIN_MESSAGE] = new StaticText("Well Done!", 20, 280, "Times Roman", 100, "red");
-                gameObjects[WIN_MESSAGE].start(); /* render win message */
-            }
-        }               
-        else if (gameObjects[SKELETON].getDirection() === RIGHT)
-        {
-            let imageData = this.mazeCtx.getImageData(gameObjects[SKELETON].getCentreX(), gameObjects[SKELETON].getCentreY(), 1, 1);
-            if (imageData.data[3] !== 0)
-            {
-                gameObjects[SKELETON].setDirection(LEFT);
-            }
-        }
+        
     }
 
 }

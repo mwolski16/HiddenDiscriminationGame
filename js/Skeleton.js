@@ -31,6 +31,7 @@ class Skeleton extends GameObject
 
     updateState()
     {
+      
         if(this.setGoWithAngelaVar)
         {
             if(this.centreY - 50 >= canvas.width)
