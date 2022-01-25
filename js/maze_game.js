@@ -112,7 +112,7 @@ function playAnotherGame()
       let delay_time = 0;
 
 
-    if(GENDER == 0)
+    if(GENDER == 1)
     {
         console.log("WOman")
        
@@ -146,7 +146,7 @@ function playAnotherGame()
             }
         }
     }
-    if(GENDER == 1)
+    if(GENDER == 0)
     {
         console.log("WOman")
        

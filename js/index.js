@@ -123,14 +123,14 @@ function onAllAssetsLoaded()
         {
             console.log("woman")
             woman_character_img.style.visibility = "hidden"
-            game = new SchoolGame_Woman();
+            game = new SchoolGame_Man();
             man_character_img.style.visibility = "hidden"
         }
         else if(GENDER == 1)
         {
             console.log("man")
             man_character_img.style.visibility = "hidden"
-            game = new SchoolGame_Man();
+            game = new SchoolGame_Woman();
             woman_character_img.style.visibility = "hidden"
         }
         else

@@ -19,6 +19,10 @@ class SchoolGame_Man extends CanvasGame
 
     collisionDetection()
     {
-        
+        console.log(gameObjects[CHARACTER].getCentreY())
+        if(gameObjects[CHARACTER].getCentreY() <= 50)
+        {
+            console.log("End game")
+        }
     }
 }

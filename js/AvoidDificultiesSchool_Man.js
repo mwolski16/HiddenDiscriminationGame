@@ -21,6 +21,9 @@ class SchoolGame_Woman extends CanvasGame
 
     collisionDetection()
     {
-        
+        if(gameObjects[CHARACTER].getCentreY() <= 50)
+        {
+            console.log("End game")
+        }
     }
 }
