@@ -79,12 +79,14 @@ function onAllAssetsLoaded()
             console.log("man")
             man_character_img.style.visibility = "hidden"
             game = new AvoidMenGame_Man();
+            woman_character_img.style.visibility = "hidden"
         }
         else if(GENDER == 1)
         {
             console.log("woman")
             woman_character_img.style.visibility = "hidden"
             game = new AvoidMenGame();
+            man_character_img.style.visibility = "hidden"
         }
         else
         {
@@ -122,12 +124,14 @@ function onAllAssetsLoaded()
             console.log("woman")
             woman_character_img.style.visibility = "hidden"
             game = new SchoolGame_Woman();
+            man_character_img.style.visibility = "hidden"
         }
         else if(GENDER == 1)
         {
             console.log("man")
             man_character_img.style.visibility = "hidden"
             game = new SchoolGame_Man();
+            woman_character_img.style.visibility = "hidden"
         }
         else
         {

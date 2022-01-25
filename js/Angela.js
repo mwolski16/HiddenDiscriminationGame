@@ -41,6 +41,7 @@ class Angela extends GameObject
         console.log(this.game_end_text)
         this.game_end_text.style.visibility = "hidden";
         this.game_end_text_confidence = document.getElementById("game_end_con");
+        console.log("This works")
         this.game_end_text_confidence.style.visibility = "hidden";
  
         
