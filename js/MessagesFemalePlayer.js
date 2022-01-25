@@ -1,6 +1,16 @@
 //against female comments
-const message1 = "130 million female under the age of 18 are not going to school"
-const message2 = "Women in STEM is very low compared to men"
-const message3 = "2/3 of females are illiterate"
-const message4 = "Only 39% of rural girls attend secondary school"
-const message5 = "Fewer years females stay in school, the lower the income"
+
+const messageFemale1 = new Image();
+messageFemale1.src = "images/messageFemale1.png";
+
+const messageFemale2 = new Image();
+messageFemale2.src = "images/messageFemale2.png";
+
+const messageFemale3 = new Image();
+messageFemale3.src = "images/messageFemale3.png";
+
+const messageFemale4 = new Image();
+messageFemale4.src = "images/messageFemale4.png";
+
+const messageFemale5 = new Image();
+messageFemale5.src = "images/messageFemale5.png";

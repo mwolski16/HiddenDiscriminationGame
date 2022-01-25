@@ -23,11 +23,59 @@ class DifficultyPopup extends GameObject
         console.log(this.y)
         this.moving_direction = getRndInteger(0,1)
         this.messageRnd = getRndInteger(0,5)
+        this.text = ""
+        if(GENDER==0)
+        {
+            if(this.messageRnd==0)
+            {
+                this.image = messageMale1;
+            }
+            if(this.messageRnd==1)
+            {
+                this.image = messageMale2;
+            }
+            if(this.messageRnd==2)
+            {
+                this.image = messageMale3;
+            }
+            if(this.messageRnd==3)
+            {
+                this.image = messageMale4;
+            }
+            if(this.messageRnd==4)
+            {
+                this.image = messageMale5;
+            }
+        }
+        if(GENDER==1)
+        {
+            if(this.messageRnd==0)
+            {
+                this.image = messageFemale1;
+            }
+            if(this.messageRnd==1)
+            {
+                this.image = messageFemale2;
+            }
+            if(this.messageRnd==2)
+            {
+                this.image = messageFemale2;
+            }
+            if(this.messageRnd==3)
+            {
+                this.image = messageFemale3;
+            }
+            if(this.messageRnd==4)
+            {
+                this.image = messageFemale4;
+            }
+        }
 
         // console.log("start point x", this.centreX - this.width/2)
         // console.log("end point x", this.centreX + this.width/2)
         // console.log("start point y", this.centreY - this.height/2)
         // console.log("end point y", this.centreY + this.height/2)
+        console.log(this.text)
     }
 
     render()
