@@ -31,6 +31,12 @@ class Skeleton extends GameObject
     updateState()
     {
 
+        if(GO_BACK_RIGHT)
+        {
+            console.log("GOGO")
+            this.centreX+=1
+        }
+
         if(this.centreX - 15 < 0) 
         {
             this.setDirection(RIGHT)  

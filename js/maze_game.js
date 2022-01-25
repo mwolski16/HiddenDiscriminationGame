@@ -142,33 +142,33 @@ function playGame()
             }
         }
 
-        for(let i = ENEMY_END_THIRD; i < ENEMY_END_FOURTH; i++)
-        {
-            let random_width_placement = getRndInteger(0, canvas.width)
-            height_placement = 0
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
-            width_difference += 50;
-            height_placement -= 300;
-            delay_time += 5000;
-            if(width_difference>canvas.width)
-            {
-                width_difference = 0;
-            }
-        }
+        // for(let i = ENEMY_END_THIRD; i < ENEMY_END_FOURTH; i++)
+        // {
+        //     let random_width_placement = getRndInteger(0, canvas.width)
+        //     height_placement = 0
+        //     gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+        //     width_difference += 50;
+        //     height_placement -= 300;
+        //     delay_time += 5000;
+        //     if(width_difference>canvas.width)
+        //     {
+        //         width_difference = 0;
+        //     }
+        // }
 
-        for(let i = ENEMY_END_FOURTH; i < ENEMY_END_FIFTH; i++)
-        {
-            let random_width_placement = getRndInteger(0, canvas.width)
-            height_placement = 0
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
-            width_difference += 50;
-            height_placement -= 300;
-            delay_time += 5000;
-            if(width_difference>canvas.width)
-            {
-                width_difference = 0;
-            }
-        }
+        // for(let i = ENEMY_END_FOURTH; i < ENEMY_END_FIFTH; i++)
+        // {
+        //     let random_width_placement = getRndInteger(0, canvas.width)
+        //     height_placement = 0
+        //     gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+        //     width_difference += 50;
+        //     height_placement -= 300;
+        //     delay_time += 5000;
+        //     if(width_difference>canvas.width)
+        //     {
+        //         width_difference = 0;
+        //     }
+        // }
     }   
     else if(GENDER == 0)
     {
@@ -300,6 +300,22 @@ function playGame()
         
     });
 
+    let call_for_angela_btn = document.getElementById("btn_angela_call");
+    call_for_angela_btn.addEventListener("click",  function (e) 
+    {
+        call_for_angela_btn.style.visibility = "hidden"
+        for(let i = ENEMY_START; i<ENEMY_END_THIRD; i++)
+        {
+            gameObjects[i].stopAndHide()
+        }
+        
+            gameObjects[ANGELA].goToCharacter(true)
+            gameObjects[SKELETON].stop()
+            gameObjects[BACKGROUND].stop()
+            RESCUE_CHARACTER = true
+            CONFIDENCE_LEVEL + 10;
+
+    });
     
 }
   

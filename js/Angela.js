@@ -45,9 +45,15 @@ class Angela extends GameObject
 
         if(height_difference < 30 && width_difference < 30)
         {
-           
             this.come_to_character = false;
             this.setDirection(STOPPED); 
+            gameObjects[SKELETON].setDirection(STOPPED)
+            GO_BACK_RIGHT = true
+        }
+
+        if(GO_BACK_RIGHT)
+        {
+            this.centreX+=1
         }
 
        else if(this.come_to_character)
