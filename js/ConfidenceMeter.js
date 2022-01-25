@@ -36,8 +36,7 @@ class ConfidenceMeter extends GameObject
 
     updateState()
     {
-        console.log(CONFIDENCE_LEVEL)
-    
+       
         if(CONFIDENCE_LEVEL < 1000 && CONFIDENCE_LEVEL > 900)
         {
             this.text = "IIIIIIIIII"

@@ -12,7 +12,7 @@ let skeletonImage = new Image();
 skeletonImage.src = "images/skeleton.png";
 
 let background = new Image();
-background.src = "images/maze_background.png";
+background.src = "images/nightClubFloor.jpg";
 
 let main_background = new Image();
 main_background.src = "images/hidden_objects_main_screen_backgrounds.png";
@@ -22,6 +22,9 @@ woman_character.src = "images/GenericWoman1.png";
 
 let man_character = new Image();
 man_character.src = "images/GenericMan1.png";
+
+let popup_background = new Image();
+popup_background.src = "images/speechBubble.png";
 
 /* Direction that the skeleton is walking */
 /* Note that this matches the row in the gameObject image for the given direction */
@@ -40,15 +43,18 @@ const MAZE = 1;
 const SKELETON = 2;
 const WIN_MESSAGE = 3;
 const REACH_THE_BAR_MSG = 4
-const CONFIDENCE_METER = 5
-const ENEMY_START = 6
-const ENEMY_END = 12
+const ANGELA = 5
+const ANGELA_POPUP = 6
+const CONFIDENCE_METER = 7
+const ENEMY_START = 8
+const ENEMY_END = 14
 const ENEMY_END_SECOND = 17
 const ENEMY_END_THIRD = 21
 const ENEMY_END_FOURTH = 26
 const ENEMY_END_FIFTH = 30
+const POPUP = 31; 
 // 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
-const GENDER = getRndInteger(0,2);
+const GENDER = getRndInteger(0,1);
 //const GENDER = 0;
 
 
@@ -75,10 +81,19 @@ function playGame()
     /* This is game specific code. It will be different for each game, as each game will have it own gameObjects */
 
     console.log(background.height)
-    gameObjects[BACKGROUND] = new BackgroundImage(background, 0, -background.height/2, canvas.width, 1000);
+    gameObjects[BACKGROUND] = new BackgroundImage(background, 0, -background.height/4, canvas.width, 1000);
     gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
     gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
+    gameObjects[ANGELA] = new Angela(woman_character, canvas.width + 20, 200);
+   
+   // gameObjects[ANGELA_POPUP] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
 
+    //go to the bar popup
+    let gttb_popup_x = 200;
+    let gttb_popup_y = 50;
+    gameObjects[POPUP] = new PopUp("Go to the bar!", gttb_popup_x, gttb_popup_y, "Roboto Thin", 18, "White", 20, "green", popup_background, gttb_popup_x-15, gttb_popup_y-25, 130,40);
+
+    
     let height_placement = 0; 
     let spread_width = 0;
     let spread_height = 0;
@@ -137,33 +152,33 @@ function playGame()
             }
         }
 
-        for(let i = ENEMY_END_THIRD; i < ENEMY_END_FOURTH; i++)
-        {
-            let random_width_placement = getRndInteger(0, canvas.width)
-            height_placement = 0
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
-            width_difference += 50;
-            height_placement -= 300;
-            delay_time += 5000;
-            if(width_difference>canvas.width)
-            {
-                width_difference = 0;
-            }
-        }
+        // for(let i = ENEMY_END_THIRD; i < ENEMY_END_FOURTH; i++)
+        // {
+        //     let random_width_placement = getRndInteger(0, canvas.width)
+        //     height_placement = 0
+        //     gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+        //     width_difference += 50;
+        //     height_placement -= 300;
+        //     delay_time += 5000;
+        //     if(width_difference>canvas.width)
+        //     {
+        //         width_difference = 0;
+        //     }
+        // }
 
-        for(let i = ENEMY_END_FOURTH; i < ENEMY_END_FIFTH; i++)
-        {
-            let random_width_placement = getRndInteger(0, canvas.width)
-            height_placement = 0
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
-            width_difference += 50;
-            height_placement -= 300;
-            delay_time += 5000;
-            if(width_difference>canvas.width)
-            {
-                width_difference = 0;
-            }
-        }
+        // for(let i = ENEMY_END_FOURTH; i < ENEMY_END_FIFTH; i++)
+        // {
+        //     let random_width_placement = getRndInteger(0, canvas.width)
+        //     height_placement = 0
+        //     gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+        //     width_difference += 50;
+        //     height_placement -= 300;
+        //     delay_time += 5000;
+        //     if(width_difference>canvas.width)
+        //     {
+        //         width_difference = 0;
+        //     }
+        // }
     }   
     else if(GENDER == 0)
     {
@@ -245,7 +260,9 @@ function playGame()
         guide_page.style.visibility = "hidden"
          /* Always play the game */
         game.start();
-        changeImage(background,"images/maze_background.png")
+        changeImage(background,"images/nightClubFloor.jpg")
+        //set the dissaperance of the popups
+        setTimeout('gameObjects[POPUP].changePos(-200,-200)', 1000);
     });
     let isGuidePageVisible = true;
     guide.addEventListener("click",  function (e) 
@@ -295,6 +312,22 @@ function playGame()
         
     });
 
+    let call_for_angela_btn = document.getElementById("btn_angela_call");
+    call_for_angela_btn.addEventListener("click",  function (e) 
+    {
+        call_for_angela_btn.style.visibility = "hidden"
+        for(let i = ENEMY_START; i<ENEMY_END_THIRD; i++)
+        {
+            gameObjects[i].stopAndHide()
+        }
+        
+            gameObjects[ANGELA].goToCharacter(true)
+            gameObjects[SKELETON].stop()
+            gameObjects[BACKGROUND].stop()
+            RESCUE_CHARACTER = true
+            CONFIDENCE_LEVEL + 10;
+
+    });
     
 }
   

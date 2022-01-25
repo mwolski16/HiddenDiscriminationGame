@@ -3,6 +3,9 @@
 /* The game allows the user to walk a skeleton around a maze.              */
 /* If the skeleton is guided to the maze exit, then a win message appears. */
 
+CALL_FOR_ANGELA_NUMBER = getRndInteger(500, 600)
+RESCUE_CHARACTER = false;
+GO_BACK_RIGHT = false;
 class AvoidMenGame extends CanvasGame
 {
     constructor()
@@ -14,13 +17,51 @@ class AvoidMenGame extends CanvasGame
         this.mazeCtx = mazeOffscreenCanvas.getContext('2d');
         mazeOffscreenCanvas.width = canvas.width;
         mazeOffscreenCanvas.height = canvas.height;
+        this.call_for_angela_btn = document.getElementById("btn_angela_call");
+        console.log(this.call_for_angela_btn)
+        this.rescueCharacter = false;
         //this.mazeCtx.drawImage(mazeGridImage, 0, 0, canvas.width, canvas.height);
+        
     }
 
     collisionDetection()
     {
 
-      
+        this.rescueCharacter = RESCUE_CHARACTER
+
+        console.log(CALL_FOR_ANGELA_NUMBER)
+        if(CONFIDENCE_LEVEL<=CALL_FOR_ANGELA_NUMBER && !this.rescueCharacter)
+        {
+            console.log("END")
+            this.call_for_angela_btn.style.visibility = "visible"   
+        } 
+
+
+        if(!this.rescueCharacter)
+        {
+            for(let i = ENEMY_START; i < ENEMY_END_THIRD; i++)
+            {
+                let horizontal_distance = Math.abs(gameObjects[SKELETON].getCentreX() - gameObjects[i].getCentreX()) 
+                let vertical_distance = Math.abs(gameObjects[SKELETON].getCentreY() - gameObjects[i].getCentreY()) 
+    
+                if(horizontal_distance < 20 && vertical_distance < 35)
+                {  
+                    //console.log(gameObjects[i].getNumber(), "collision")
+                    CONFIDENCE_LEVEL -=0.7;
+                }
+            
+            }
+        
+        } 
+        else if(GO_BACK_RIGHT)
+        {
+            gameObjects[ANGELA].setDirection(RIGHT)            
+            gameObjects[SKELETON].setDirection(RIGHT)
+        }
+        
+           
+        
+
         for(let i = ENEMY_START; i < ENEMY_END; i++)
         {
             for(let j = ENEMY_START; j < ENEMY_END; j++)
@@ -52,18 +93,7 @@ class AvoidMenGame extends CanvasGame
     
         }
 
-        for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i++)
-        {
-            let horizontal_distance = Math.abs(gameObjects[SKELETON].getCentreX() - gameObjects[i].getCentreX()) 
-            let vertical_distance = Math.abs(gameObjects[SKELETON].getCentreY() - gameObjects[i].getCentreY()) 
-
-            if(horizontal_distance < 20 && vertical_distance < 35)
-            {  
-                //console.log(gameObjects[i].getNumber(), "collision")
-                CONFIDENCE_LEVEL -=1;
-            }
-        
-        }
+       
                    
 
         if (!this.mazeCtx)
@@ -114,4 +144,5 @@ class AvoidMenGame extends CanvasGame
             }
         }
     }
+
 }
