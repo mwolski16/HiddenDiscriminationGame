@@ -14,6 +14,9 @@ skeletonImage.src = "images/skeleton.png";
 let background = new Image();
 background.src = "images/nightClubFloor.jpg";
 
+let background2 = new Image();
+background2.src = "images/maze_background.png";
+
 let main_background = new Image();
 main_background.src = "images/hidden_objects_main_screen_backgrounds.png";
 
@@ -32,10 +35,12 @@ man_character2.src = "images/GenericMan2.png";
 let man_character3 = new Image();
 man_character3.src = "images/GenericMan3.png";
 
-
-
 let popup_background = new Image();
 popup_background.src = "images/speechBubble.png";
+
+let background_school_img = new Image();
+background_school_img.src = "images/schoolHallBathroom.jpg";
+
 
 let popup_man_1 = new Image();
 popup_man_1.src = "images/1.png"
@@ -63,13 +68,14 @@ const WIN_MESSAGE = 3;
 const REACH_THE_BAR_MSG = 4
 const ANGELA = 5
 const ANGELA_POPUP = 6
-const CONFIDENCE_METER = 7
+const CONFIDENCE_METER = 30
 const ENEMY_START = 8
 const ENEMY_END = 14
 const ENEMY_END_SECOND = 17
 const ENEMY_END_THIRD = 21
 const ENEMY_END_FOURTH = 26
-const ENEMY_END_FIFTH = 30
+const ENEMY_END_FIFTH = 28
+const CHARACTER = 29
 const POPUP = 31; 
 const POPUP_START = 32;
 const POPUP_END = 40;
@@ -77,8 +83,7 @@ const POPUP_END_WOMAN_LOST = 41;
 const POPUP_ANGELA_RESCUE = 42; 
 const POPUP_END_GAME = 43;
 
-// 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
-const GENDER = getRndInteger(0,1);
+
 //const GENDER = 0;
 
 // Needed for disappearing popups using the timeout function
@@ -89,6 +94,114 @@ var CONFIDENCE_LEVEL = 1000;
 
 /******************* END OF Declare game specific data and functions *****************/
 
+function playAnotherGame()
+{
+    gameObjects[BACKGROUND] = new BackgroundSchool(background_school_img, 0, -background.height/4, canvas.width, 1000);
+    gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "EnergyFont", 30, "RED")
+
+      //go to the bar popup
+      let gttb_popup_x = 150;
+      let gttb_popup_y = 50;
+      gameObjects[POPUP] = new PopUp("Avoid the discriminations!", gttb_popup_x, gttb_popup_y, "Roboto Thin", 18, "White", 20, "green", popup_background, 100, gttb_popup_y-25, 300 ,40, false);
+  
+      
+      let height_placement = canvas.height - 200; 
+      let spread_width = 0;
+      let spread_height = 0;
+      let width_difference = 0;
+      let delay_time = 0;
+
+
+    if(GENDER == 0)
+    {
+        console.log("WOman")
+       
+        gameObjects[CHARACTER] = new SchoolCharacter(woman_character, canvas.width/2, canvas.height-30);
+        for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i+=2)
+        {
+            let randomMan = getRndInteger(0,2)
+            let manPic = null
+            if(randomMan == 0)
+            {
+                manPic = man_character
+            }
+            if(randomMan == 1)
+            {
+                manPic = man_character2
+            }
+            if(randomMan == 2)
+            {
+                manPic = man_character3
+            }
+    
+            let random_width_placement = getRndInteger(100, canvas.width-100)
+            let random_height_placement = getRndInteger(canvas.height/2, canvas.height)
+            gameObjects[i] = new DifficultyPopup(popup_man_1, i, random_width_placement, height_placement, 100, 70, 0);
+            gameObjects[i+1] = new DifficultyPopup(popup_man_1, i, random_width_placement - 100, height_placement, 100, 70, 0);
+            height_placement -= 100;
+            if(width_difference>canvas.width)
+            {
+                width_difference = 0;
+            }
+        }
+    }
+    if(GENDER == 1)
+    {
+        console.log("WOman")
+       
+        gameObjects[CHARACTER] = new SchoolCharacter(man_character3, canvas.width/2, canvas.height-30);
+        for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i+=2)
+        {
+            let randomMan = getRndInteger(0,2)
+            let manPic = null
+            if(randomMan == 0)
+            {
+                manPic = man_character
+            }
+            if(randomMan == 1)
+            {
+                manPic = man_character2
+            }
+            if(randomMan == 2)
+            {
+                manPic = man_character3
+            }
+            let random_width_placement = getRndInteger(100, canvas.width-100)
+            let random_height_placement = getRndInteger(canvas.height/2, canvas.height)
+            gameObjects[i] = new DifficultyPopup(popup_man_1, i, random_width_placement, height_placement, 100, 70, 0);
+            gameObjects[i+1] = new DifficultyPopup(popup_man_1, i, random_width_placement - 100, height_placement, 100, 70, 0);
+            height_placement -= 100;
+            if(width_difference>canvas.width)
+            {
+                width_difference = 0;
+            }
+        }
+    }
+
+
+      /* If they are needed, then include any game-specific mouse and keyboard listners */
+      document.addEventListener('keydown', function (e)
+      {
+          if (e.keyCode === 37)  // left
+          {
+              gameObjects[CHARACTER].setDirection(LEFT);
+          }
+          else if (e.keyCode === 38) // up
+          {
+              gameObjects[CHARACTER].setDirection(UP);
+          }
+          else if (e.keyCode === 39) // right
+          {
+              gameObjects[CHARACTER].setDirection(RIGHT);
+          }
+          else if (e.keyCode === 40) // down
+          {
+              gameObjects[CHARACTER].setDirection(DOWN);
+          }
+      });
+  
+      
+}
 
 /* Always have a playGame() function                                     */
 /* However, the content of this function will be different for each game */
@@ -112,8 +225,6 @@ function playGame()
     gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "EnergyFont", 30, "RED")
     gameObjects[ANGELA] = new Angela(angela_character, canvas.width + 20, 200);
 
-    
-   // gameObjects[ANGELA_POPUP] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
 
     //go to the bar popup
     let gttb_popup_x = 200;
@@ -322,41 +433,7 @@ function playGame()
         }
     });
 
-    button.addEventListener("click",  function (e) 
-    {
-        let back_pic = document.getElementById("main_image")
-        back_pic.style.visibility = "hidden";
-        console.log(GENDER)
-        if(GENDER == 0)
-        {
-            game = new AvoidMenGame_Man();
-        }
-        else if(GENDER == 1)
-        {
-            game = new AvoidMenGame();
-        }
-        else
-        {
-            game = new AvoidMenGame_Transgender();
-        }
-        //game = new AvoidMenGame()
-        buttonArray = document.getElementsByClassName('buttonClass');
-        
-      
-        for(let i = 0; i<buttonArray.length; i++)
-        {
-            tempStyle = buttonArray[i].style;
-            
-            buttonArray[i].style.visibility = "hidden";
-        }
-        guide_page.style.visibility = "hidden"
-         /* Always play the game */
-        game.start();
-        changeImage(background,"images/nightClubFloor.jpg")
-
-        //set the dissaperance of the popup
-        setTimeout('gameObjects[POPUP].changePos(-200,-200)', 5000);
-    });
+   
     let isGuidePageVisible = true;
     guide.addEventListener("click",  function (e) 
     {
