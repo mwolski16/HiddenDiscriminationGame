@@ -23,3 +23,8 @@
     z-index:100;
     font-size:50px;
 }
+
+@font-face {
+    font-family: 'EnergyFont';
+    src: url("../font/Mochiy_Pop_P_One/MochiyPopPOne-Regular.ttf");
+}
