@@ -29,7 +29,7 @@ class AvoidMenGame extends CanvasGame
 
         this.rescueCharacter = RESCUE_CHARACTER
 
-        console.log(CALL_FOR_ANGELA_NUMBER)
+        
         if(CONFIDENCE_LEVEL<=CALL_FOR_ANGELA_NUMBER && !this.rescueCharacter)
         {
             console.log("END")

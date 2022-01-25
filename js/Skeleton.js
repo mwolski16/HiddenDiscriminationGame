@@ -26,17 +26,18 @@ class Skeleton extends GameObject
 
         this.SKELETON_SPEED = 2;
         this.setDirection(STOPPED);
+        this.setGoWithAngelaVar = false;
     }
 
     updateState()
     {
-
-        if(GO_BACK_RIGHT)
+        if(this.setGoWithAngelaVar)
         {
-            console.log("GOGO")
-            this.centreX+=1
-        }
-
+            if(this.centreY - 50 >= canvas.width)
+            {
+                 
+            }
+        } 
         if(this.centreX - 15 < 0) 
         {
             this.setDirection(RIGHT)  
@@ -124,5 +125,9 @@ class Skeleton extends GameObject
     getCentreY()
     {
         return this.centreY;
+    }
+    setGoWithAngela(value)
+    {
+        this.setGoWithAngelaVar = value;
     }
 }

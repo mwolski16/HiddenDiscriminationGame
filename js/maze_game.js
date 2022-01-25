@@ -20,8 +20,17 @@ main_background.src = "images/hidden_objects_main_screen_backgrounds.png";
 let woman_character = new Image();
 woman_character.src = "images/GenericWoman1.png";
 
+let angela_character = new Image();
+angela_character.src = "images/Angela.png";
+
 let man_character = new Image();
 man_character.src = "images/GenericMan1.png";
+
+let man_character2 = new Image();
+man_character2.src = "images/GenericMan2.png";
+
+let man_character3 = new Image();
+man_character3.src = "images/GenericMan3.png";
 
 let popup_background = new Image();
 popup_background.src = "images/speechBubble.png";
@@ -83,8 +92,8 @@ function playGame()
     console.log(background.height)
     gameObjects[BACKGROUND] = new BackgroundImage(background, 0, -background.height/4, canvas.width, 1000);
     gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
-    gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
-    gameObjects[ANGELA] = new Angela(woman_character, canvas.width + 20, 200);
+    gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "EnergyFont", 30, "RED")
+    gameObjects[ANGELA] = new Angela(angela_character, canvas.width + 20, 200);
    
    // gameObjects[ANGELA_POPUP] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
 
@@ -104,9 +113,23 @@ function playGame()
     {
         for(let i = ENEMY_START; i < ENEMY_END; i++)
         {
+            let randomMan = getRndInteger(0,2)
+            let manPic = null
+            if(randomMan == 0)
+            {
+                manPic = man_character
+            }
+            if(randomMan == 1)
+            {
+                manPic = man_character2
+            }
+            if(randomMan == 2)
+            {
+                manPic = man_character3
+            }
             let random_width_placement = getRndInteger(0, canvas.width)
             let random_height_placement = getRndInteger(canvas.height/2, canvas.height)
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, random_height_placement, delay_time);
+            gameObjects[i] = new EnemyCharacter(manPic, i, width_difference, random_height_placement, delay_time);
             width_difference += 100;
             if(width_difference>canvas.width)
             {
@@ -117,9 +140,24 @@ function playGame()
 
         for(let i = ENEMY_END; i < ENEMY_END_SECOND; i++)
         {
+            let randomMan = getRndInteger(0,2)
+            let manPic = null
+            if(randomMan == 0)
+            {
+                manPic = man_character
+            }
+            if(randomMan == 1)
+            {
+                manPic = man_character2
+            }
+            if(randomMan == 2)
+            {
+                manPic = man_character3
+            }
+
             let random_width_placement = getRndInteger(0, canvas.width)
             height_placement = 150
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+            gameObjects[i] = new EnemyCharacter(manPic, i, width_difference, height_placement, delay_time);
             width_difference += 150;
             height_placement -= 300;
         
@@ -140,9 +178,25 @@ function playGame()
 
         for(let i = ENEMY_END_SECOND; i < ENEMY_END_THIRD; i++)
         {
+            let randomMan = getRndInteger(0,2)
+            let manPic = null
+            if(randomMan == 0)
+            {
+                manPic = man_character
+            }
+            if(randomMan == 1)
+            {
+                manPic = man_character2
+            }
+            if(randomMan == 2)
+            {
+                manPic = man_character3
+            }
+
+
             let random_width_placement = getRndInteger(0, canvas.width)
             height_placement = 0
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+            gameObjects[i] = new EnemyCharacter(manPic, i, width_difference, height_placement, delay_time);
             width_difference += 50;
             height_placement -= 300;
             delay_time += 2000;
@@ -322,7 +376,7 @@ function playGame()
         }
         
             gameObjects[ANGELA].goToCharacter(true)
-            gameObjects[SKELETON].stop()
+            gameObjects[SKELETON].setDirection(STOPPED)
             gameObjects[BACKGROUND].stop()
             RESCUE_CHARACTER = true
             CONFIDENCE_LEVEL + 10;
