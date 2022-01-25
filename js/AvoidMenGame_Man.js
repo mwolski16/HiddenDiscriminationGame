@@ -41,6 +41,14 @@ class AvoidMenGame_Man extends CanvasGame
                 //console.log(gameObjects[i].getNumber(), "collision")
                 CONFIDENCE_LEVEL -=1;
             }
+            let popupToTrack = 33 //getRndInteger(31,32);
+
+            //console.log(gameObjects[popupToTrack])
+            //console.log(gameObjects)
+            if(gameObjects[popupToTrack].getCentreY() == gameObjects[SKELETON].getCentreY())
+            {
+                CONFIDENCE_LEVEL -= 10;
+            }
         
         } 
                

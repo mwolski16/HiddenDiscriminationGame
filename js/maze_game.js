@@ -32,6 +32,8 @@ man_character2.src = "images/GenericMan2.png";
 let man_character3 = new Image();
 man_character3.src = "images/GenericMan3.png";
 
+
+
 let popup_background = new Image();
 popup_background.src = "images/speechBubble.png";
 
@@ -122,6 +124,7 @@ function playGame()
     
     if(GENDER == 1)
     {
+        gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
         for(let i = ENEMY_START; i < ENEMY_END; i++)
         {
             let randomMan = getRndInteger(0,2)
@@ -247,7 +250,7 @@ function playGame()
     }   
     else if(GENDER == 0)
     {
-        
+        gameObjects[SKELETON] = new MazeSkeleton(man_character3, canvas.width/2, canvas.height-30);
         for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i++)
         {
             let width_placement = getRndChoice(getRndInteger(10,250), getRndInteger(300,400));

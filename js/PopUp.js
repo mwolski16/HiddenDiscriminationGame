@@ -85,6 +85,12 @@ class PopUp extends GameObject
     {
         this.shouldMove = x;
     }
+
+    getCentreY()
+    {
+        //console.log("TO przeciez istnieje")
+        return this.img_y; 
+    }
         
 
 }
