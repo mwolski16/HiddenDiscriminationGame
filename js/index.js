@@ -15,6 +15,8 @@
 let canvas = null;
 let ctx = null;
 let button = null;
+let button_work = null;
+let popup_school = null;
 let btn_school = null
 /* Always create an array that holds the default game gameObjects */
 let gameObjects = [];
@@ -53,6 +55,8 @@ function onAllAssetsLoaded()
    
     woman_character_img = document.getElementById("woman_character");
     man_character_img = document.getElementById("man_character");
+    button_work = document.getElementById("work_place_btn")
+    popup_school = document.getElementById("school_fact")
 
     if(GENDER == 0)
     {
@@ -112,7 +116,17 @@ function onAllAssetsLoaded()
         setTimeout('gameObjects[POPUP].changePos(-200,-200)', 5000);
     });
 
+    button_work.addEventListener("click", function (e)
+    {
+        popup_school.style.visibility = "visible"
+    })
 
+    popup_school.addEventListener("click", function (e)
+    {
+        popup_school.style.visibility = "hidden"
+    })
+ 
+ 
     btn_school.addEventListener("click",  function (e) 
     {
         playAnotherGame(); // Each game will include its own .js file, which will hold the game's palyGame() function
