@@ -100,6 +100,7 @@ function playGame()
     gameObjects[BACKGROUND] = new BackgroundImage(background, 0, -background.height/4, canvas.width, 1000);
     gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
     gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "EnergyFont", 30, "RED")
+    gameObjects[ANGELA] = new Angela(angela_character, canvas.width + 20, 200);
    
    // gameObjects[ANGELA_POPUP] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
 
