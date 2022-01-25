@@ -139,6 +139,7 @@ function playAnotherGame()
             gameObjects[i] = new DifficultyPopup(popup_man_1, i, random_width_placement, height_placement, 100, 70, 0);
             gameObjects[i+1] = new DifficultyPopup(popup_man_1, i, random_width_placement - 100, height_placement, 100, 70, 0);
             height_placement -= 100;
+
             if(width_difference>canvas.width)
             {
                 width_difference = 0;
@@ -403,7 +404,6 @@ function playGame()
         //do smth
     }
 
-   
     /* END OF game specific code. */
 
 
@@ -475,6 +475,19 @@ function playGame()
     //      /* Always play the game */
     //     game.start();
     //     changeImage(background,"images/background.jpg")
+    });
+
+
+  
+    woman_character_img.addEventListener("click",  function (e) 
+    {
+       
+    });
+
+   
+    man_character_img.addEventListener("click",  function (e) 
+    {
+
     });
 
     guide.addEventListener("hover",  function (e) 

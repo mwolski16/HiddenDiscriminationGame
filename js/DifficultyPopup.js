@@ -24,12 +24,8 @@ class DifficultyPopup extends GameObject
         this.moving_direction = getRndInteger(0,1)
         this.messageRnd = getRndInteger(0,5)
 
-
-      
-   
         // console.log("start point x", this.centreX - this.width/2)
         // console.log("end point x", this.centreX + this.width/2)
-
         // console.log("start point y", this.centreY - this.height/2)
         // console.log("end point y", this.centreY + this.height/2)
     }

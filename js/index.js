@@ -20,6 +20,9 @@ let btn_school = null
 let gameObjects = [];
 // 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
 const GENDER = getRndInteger(0,1);
+let woman_character_img = null
+let man_character_img = null
+
 /*********** END OF Declare data and functions that are needed for all games *********/
 
 /* Wait for all game assets, such as audio and images to load before starting the game */
@@ -47,6 +50,21 @@ function onAllAssetsLoaded()
     //refreshElementPosition(button, BUTTON_X, BUTTON_Y);
     //button.addEventListener('click', refreshElementPosition(button, Math.random()*100,  Math.random()*100));
    
+   
+    woman_character_img = document.getElementById("woman_character");
+    man_character_img = document.getElementById("man_character");
+
+    if(GENDER == 0)
+    {
+        console.log("man")
+        man_character_img.style.visibility = "visible"
+      
+    }
+    else if(GENDER == 1)
+    {
+        console.log("woman")
+        woman_character_img.style.visibility = "visible"    
+    }
     ctx = canvas.getContext("2d");
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
@@ -58,10 +76,14 @@ function onAllAssetsLoaded()
         console.log(GENDER)
         if(GENDER == 0)
         {
+            console.log("man")
+            man_character_img.style.visibility = "hidden"
             game = new AvoidMenGame_Man();
         }
         else if(GENDER == 1)
         {
+            console.log("woman")
+            woman_character_img.style.visibility = "hidden"
             game = new AvoidMenGame();
         }
         else
@@ -97,10 +119,14 @@ function onAllAssetsLoaded()
         console.log(GENDER)
         if(GENDER == 0)
         {
+            console.log("woman")
+            woman_character_img.style.visibility = "hidden"
             game = new SchoolGame_Woman();
         }
         else if(GENDER == 1)
         {
+            console.log("man")
+            man_character_img.style.visibility = "hidden"
             game = new SchoolGame_Man();
         }
         else
@@ -120,8 +146,6 @@ function onAllAssetsLoaded()
         guide_page.style.visibility = "hidden"
          /* Always play the game */
         game.start();
-        
-       
         changeImage(background,"images/nightClubFloor.jpg")
         setTimeout('gameObjects[POPUP].changePos(-200,-200)', 5000);
     
