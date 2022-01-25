@@ -15,14 +15,23 @@ class SchoolGame_Man extends CanvasGame
         mazeOffscreenCanvas.width = canvas.width;
         mazeOffscreenCanvas.height = canvas.height;
         //this.mazeCtx.drawImage(mazeGridImage, 0, 0, canvas.width, canvas.height);
+        this.game_end_school = document.getElementById("game_end_school");
+        this.game_end_school_con = document.getElementById("game_end_school_con");
+        this.gameOver = false;
     }
 
     collisionDetection()
     {
-        console.log(gameObjects[CHARACTER].getCentreY())
-        if(gameObjects[CHARACTER].getCentreY() <= 50)
+       
+        if(gameObjects[CHARACTER].getCentreY() <= 100 && !this.gameOver)
         {
-            console.log("End game")
+            //console.log("End game")
+            console.log(gameObjects[CHARACTER].getCentreY())
+            this.game_end_school.style.visibility = "visible";
+            gameObjects[CHARACTER].setDirection(STOPPED);
+            this.game_end_school_con.innerHTML = Math.round(CONFIDENCE_LEVEL);
+            this.game_end_school_con.style.visibility = "visible";
+            this.gameOver = true;
         }
     }
 }

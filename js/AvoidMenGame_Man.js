@@ -14,6 +14,9 @@ class AvoidMenGame_Man extends CanvasGame
         this.mazeCtx = mazeOffscreenCanvas.getContext('2d');
         mazeOffscreenCanvas.width = canvas.width;
         mazeOffscreenCanvas.height = canvas.height;
+        this.gameOver = false;
+        this.game_end_bar = document.getElementById("game_end_bar");
+        this.game_end_bar_con = document.getElementById("game_end_bar_con");
         for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i++)
         {
             gameObjects[i].setSpeed(0);
@@ -29,7 +32,19 @@ class AvoidMenGame_Man extends CanvasGame
 
     collisionDetection()
     {
+        if(gameObjects[SKELETON].getCentreY()<= 170 && gameObjects[SKELETON].getCentreX()>= 250 && !this.gameOver)
+        {
+            //console.log(gameObjects[SKELETON].getCentreX())
 
+            gameObjects[SKELETON].stop();
+            this.gameOver = true;
+            this.game_end_bar.style.visibility = "visible";
+            this.game_end_bar_con.innerHTML = Math.round(CONFIDENCE_LEVEL);
+            this.game_end_bar_con.style.visibility = "visible";
+
+
+
+        }
       
         for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i++)
         {
@@ -49,6 +64,7 @@ class AvoidMenGame_Man extends CanvasGame
             {
                 CONFIDENCE_LEVEL -= 10;
             }
+            
         
         } 
                
