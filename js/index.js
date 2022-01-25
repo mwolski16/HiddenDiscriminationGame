@@ -138,3 +138,8 @@ function removeInvertColors(x)
 {
     x.style.filter = "invert(0%)";
 }
+
+function showElement(x)
+{
+    x.style.visibility = "visible";
+}

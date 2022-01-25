@@ -40,6 +40,9 @@ popup_background.src = "images/speechBubble.png";
 let popup_man_1 = new Image();
 popup_man_1.src = "images/1.png"
 
+let popup_angela = new Image();
+popup_angela.src = "images/2.png"
+
 //xxxxxx
 /* Direction that the skeleton is walking */
 /* Note that this matches the row in the gameObject image for the given direction */
@@ -71,6 +74,8 @@ const POPUP = 31;
 const POPUP_START = 32;
 const POPUP_END = 40;
 const POPUP_END_WOMAN_LOST = 41;
+const POPUP_ANGELA_RESCUE = 42; 
+const POPUP_END_GAME = 43;
 
 // 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
 const GENDER = getRndInteger(0,1);
@@ -114,7 +119,7 @@ function playGame()
     let gttb_popup_x = 200;
     let gttb_popup_y = 50;
     gameObjects[POPUP] = new PopUp("Go to the bar!", gttb_popup_x, gttb_popup_y, "Roboto Thin", 18, "White", 20, "green", popup_background, gttb_popup_x-15, gttb_popup_y-25, 130,40, false);
-
+    
     
     let height_placement = 0; 
     let spread_width = 0;

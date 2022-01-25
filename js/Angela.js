@@ -34,15 +34,35 @@ class Angela extends GameObject
         
         this.come_to_character = false
         this.rescue_character = false  
+        this.popup_follow = true;
+        this.popup_end = false;
+        this.angela_went_off_screen = false;
+        this.game_end_text = document.getElementById("game_end");
+        console.log(this.game_end_text)
+        this.game_end_text.style.visibility = "hidden";
+        this.game_end_text_confidence = document.getElementById("game_end_con");
+        this.game_end_text_confidence.style.visibility = "hidden";
+ 
         
     }
-
+    
     updateState()
     {
-
+        //console.log("Come to character: "+this.come_to_character)
+        //console.log("Rescuing character: "+this.rescue_character)
+        if(this.come_to_character && this.popup_follow)
+        {
+            console.log("Creating pop up.")
+            gameObjects[POPUP_ANGELA_RESCUE] = new PopUpSimple(0, 0,200, 120, popup_angela);
+            gameObjects[POPUP_ANGELA_RESCUE].start();
+            console.log(gameObjects[POPUP_ANGELA_RESCUE])
+            this.popup_follow = false;
+        }
+        
         let height_difference = Math.abs(gameObjects[SKELETON].getCentreY() - this.centreY) 
         let width_difference = Math.abs(gameObjects[SKELETON].getCentreX() - this.centreX)
 
+        
         if(height_difference < 30 && width_difference < 30)
         {
             this.come_to_character = false;
@@ -62,7 +82,7 @@ class Angela extends GameObject
        {
         
             this.setDirection(LEFT); 
-
+            
             if(this.centreY > gameObjects[SKELETON].getCentreY() )
             {
                 this.centreY-=this.SKELETON_SPEED; 
@@ -112,6 +132,26 @@ class Angela extends GameObject
             this.column = 0;
             this.row = 2;
             this.currentgameObject = 0;
+        }
+
+        if(this.centreX > canvas.width +20 && !this.angela_went_off_screen)
+        {
+            console.log("Angela spierdolila za ekran")
+           this.popup_end = true;
+           this.angela_went_off_screen = true;
+        }
+        //console.log(this.angela_went_off_screen)
+        if(this.popup_end)
+        {
+            console.log("Created end pop up")
+            //gameObjects[POPUP_END_GAME] = new StaticText("Angela has saved you! Your confidence: "+CONFIDENCE_LEVEL, canvas.width-500, canvas.height/2, "roboto light", 20, "red");
+
+           // console.log(gameObjects[POPUP_END_GAME]);
+           this.game_end_text.style.visibility = "visible";
+           this.game_end_text_confidence.innerHTML = Math.round(CONFIDENCE_LEVEL) + "/1000";
+           this.game_end_text_confidence.style.visibility = "visible";
+           //console.log(game_end_text)
+           this.popup_end = false;
         }
     }
 
