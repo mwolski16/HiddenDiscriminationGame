@@ -6,9 +6,9 @@ class PopUp extends GameObject
     /* Each gameObject MUST have a constructor() and a render() method.        */
     /* If the object animates, then it must also have an updateState() method. */
 
-    constructor(text, x, y, font, fontSize, colour, bg_size, bg_colour, img, img_x, img_y, img_width, img_height, delay)
+    constructor(text, x, y, font, fontSize, colour, bg_size, bg_colour, img, img_x, img_y, img_width, img_height, shouldMove,indexOfTrackedObject, delay)
     {
-        super(null, delay); /* as this class extends from GameObject, you must always call super() */
+        super(UPDATE_TIME, delay); /* as this class extends from GameObject, you must always call super() */
 
         /* These variables depend on the object */
         this.text = text;
@@ -24,13 +24,15 @@ class PopUp extends GameObject
         this.img_y = img_y;
         this.img_width = img_width;
         this.img_height = img_height;
+        this.shouldMove = shouldMove; 
+        this.indexOfTrackedObject = indexOfTrackedObject;
 
         ctx.font = this.fontSize + "px " + this.font;
         this.width = ctx.measureText(this.text).width;
-        if (this.x === STATIC_TEXT_CENTRE)
-        {
-            this.x = (canvas.width - this.width) / 2;
-        }
+        // if (this.x === STATIC_TEXT_CENTRE)
+        // {
+        //     this.x = (canvas.width - this.width) / 2;
+        // }
     }
 
     render()
@@ -47,7 +49,7 @@ class PopUp extends GameObject
         {
             ctx.beginPath();
             ctx.fillStyle = this.bg_colour;
-            console.log(this.x+this.bg_size);
+            //console.log(this.x+this.bg_size);
             ctx.rect(this.x-this.bg_size, this.y-this.bg_size, this.bg_size+this.text.length*6.6,this.bg_size+this.fontSize);
             ctx.fill();
          }
@@ -60,13 +62,28 @@ class PopUp extends GameObject
         
     }
 
-    changePos(x,y)
+    changePos(x,y,shouldMove)
     {
         console.log("Changing pos")
        this.x = x;
        this.y = y;
        this.img_x = x;
        this.img_y = y;
+       this.shouldMove = shouldMove;
+    }
+
+    updateState()
+    {
+       if(this.shouldMove)
+       {
+           this.img_x = gameObjects[this.indexOfTrackedObject].getCentreX()-60;
+           this.img_y = gameObjects[this.indexOfTrackedObject].getCentreY()-90;
+       }
+    }
+
+    changeShouldMoveState(x)
+    {
+        this.shouldMove = x;
     }
         
 
