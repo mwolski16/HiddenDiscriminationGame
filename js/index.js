@@ -15,9 +15,11 @@
 let canvas = null;
 let ctx = null;
 let button = null;
+let btn_school = null
 /* Always create an array that holds the default game gameObjects */
 let gameObjects = [];
-
+// 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
+const GENDER = getRndInteger(0,1);
 /*********** END OF Declare data and functions that are needed for all games *********/
 
 /* Wait for all game assets, such as audio and images to load before starting the game */
@@ -37,6 +39,7 @@ function onAllAssetsLoaded()
 
     //button = document.getElementsByClassName('buttonClass');
     button = document.getElementById('btn');
+    btn_school = document.getElementById('btn_school');
     guide = document.getElementById("guide");
     //console.log(button);
     const BUTTON_X = 100;
@@ -47,8 +50,82 @@ function onAllAssetsLoaded()
     ctx = canvas.getContext("2d");
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
+    button.addEventListener("click",  function (e) 
+    {
+        playGame(); // Each game will include its own .js file, which will hold the game's palyGame() function
+        let back_pic = document.getElementById("main_image")
+        back_pic.style.visibility = "hidden";
+        console.log(GENDER)
+        if(GENDER == 0)
+        {
+            game = new AvoidMenGame_Man();
+        }
+        else if(GENDER == 1)
+        {
+            game = new AvoidMenGame();
+        }
+        else
+        {
+            game = new AvoidMenGame_Transgender();
+        }
+        //game = new AvoidMenGame()
+        buttonArray = document.getElementsByClassName('buttonClass');
+        
+      
+        for(let i = 0; i<buttonArray.length; i++)
+        {
+            tempStyle = buttonArray[i].style;
+            
+            buttonArray[i].style.visibility = "hidden";
+        }
+        guide_page.style.visibility = "hidden"
+         /* Always play the game */
+        game.start();
+        changeImage(background,"images/nightClubFloor.jpg")
 
-    playGame(); // Each game will include its own .js file, which will hold the game's palyGame() function
+        //set the dissaperance of the popup
+        setTimeout('gameObjects[POPUP].changePos(-200,-200)', 5000);
+    });
+
+
+    btn_school.addEventListener("click",  function (e) 
+    {
+        playAnotherGame(); // Each game will include its own .js file, which will hold the game's palyGame() function
+        let back_pic = document.getElementById("main_image")
+        back_pic.style.visibility = "hidden";
+        console.log(GENDER)
+        if(GENDER == 0)
+        {
+            game = new SchoolGame_Woman();
+        }
+        else if(GENDER == 1)
+        {
+            game = new SchoolGame_Man();
+        }
+        else
+        {
+            game = new SchoolGame_Man();
+        }
+        //game = new AvoidMenGame()
+        buttonArray = document.getElementsByClassName('buttonClass');
+        
+      
+        for(let i = 0; i<buttonArray.length; i++)
+        {
+            tempStyle = buttonArray[i].style;
+            
+            buttonArray[i].style.visibility = "hidden";
+        }
+        guide_page.style.visibility = "hidden"
+         /* Always play the game */
+        game.start();
+        
+       
+        changeImage(background,"images/nightClubFloor.jpg")
+        setTimeout('gameObjects[POPUP].changePos(-200,-200)', 5000);
+    
+    });
+  
 }
 
 

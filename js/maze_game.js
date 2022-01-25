@@ -14,6 +14,9 @@ skeletonImage.src = "images/skeleton.png";
 let background = new Image();
 background.src = "images/nightClubFloor.jpg";
 
+let background2 = new Image();
+background2.src = "images/maze_background.png";
+
 let main_background = new Image();
 main_background.src = "images/hidden_objects_main_screen_backgrounds.png";
 
@@ -72,8 +75,7 @@ const POPUP_START = 32;
 const POPUP_END = 40;
 const POPUP_END_WOMAN_LOST = 41;
 
-// 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
-const GENDER = getRndInteger(0,1);
+
 //const GENDER = 0;
 
 // Needed for disappearing popups using the timeout function
@@ -84,6 +86,34 @@ var CONFIDENCE_LEVEL = 1000;
 
 /******************* END OF Declare game specific data and functions *****************/
 
+function playAnotherGame()
+{
+    gameObjects[BACKGROUND] = new StaticImage(background2, 0, -background.height/4, canvas.width, 1000);
+
+      //go to the bar popup
+      let gttb_popup_x = 200;
+      let gttb_popup_y = 50;
+      gameObjects[POPUP] = new PopUp("Avoid the discriminations!", gttb_popup_x, gttb_popup_y, "Roboto Thin", 18, "White", 20, "green", popup_background, gttb_popup_x-15, gttb_popup_y-25, 130,40, false);
+  
+      
+      let height_placement = 0; 
+      let spread_width = 0;
+      let spread_height = 0;
+      let width_difference = 0;
+      let delay_time = 0;
+
+
+    if(GENDER == 0)
+    {
+        gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
+    }
+    if(GENDER == 1)
+    {
+        gameObjects[SKELETON] = new MazeSkeleton(man_character3, canvas.width/2, canvas.height-30);
+    }
+
+      
+}
 
 /* Always have a playGame() function                                     */
 /* However, the content of this function will be different for each game */
@@ -317,41 +347,7 @@ function playGame()
         }
     });
 
-    button.addEventListener("click",  function (e) 
-    {
-        let back_pic = document.getElementById("main_image")
-        back_pic.style.visibility = "hidden";
-        console.log(GENDER)
-        if(GENDER == 0)
-        {
-            game = new AvoidMenGame_Man();
-        }
-        else if(GENDER == 1)
-        {
-            game = new AvoidMenGame();
-        }
-        else
-        {
-            game = new AvoidMenGame_Transgender();
-        }
-        //game = new AvoidMenGame()
-        buttonArray = document.getElementsByClassName('buttonClass');
-        
-      
-        for(let i = 0; i<buttonArray.length; i++)
-        {
-            tempStyle = buttonArray[i].style;
-            
-            buttonArray[i].style.visibility = "hidden";
-        }
-        guide_page.style.visibility = "hidden"
-         /* Always play the game */
-        game.start();
-        changeImage(background,"images/nightClubFloor.jpg")
-
-        //set the dissaperance of the popup
-        setTimeout('gameObjects[POPUP].changePos(-200,-200)', 5000);
-    });
+   
     let isGuidePageVisible = true;
     guide.addEventListener("click",  function (e) 
     {
