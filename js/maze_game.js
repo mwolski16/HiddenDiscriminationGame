@@ -14,18 +14,36 @@ skeletonImage.src = "images/skeleton.png";
 let background = new Image();
 background.src = "images/nightClubFloor.jpg";
 
+let background2 = new Image();
+background2.src = "images/maze_background.png";
+
 let main_background = new Image();
 main_background.src = "images/hidden_objects_main_screen_backgrounds.png";
 
 let woman_character = new Image();
 woman_character.src = "images/GenericWoman1.png";
 
+let angela_character = new Image();
+angela_character.src = "images/Angela.png";
+
 let man_character = new Image();
 man_character.src = "images/GenericMan1.png";
+
+let man_character2 = new Image();
+man_character2.src = "images/GenericMan2.png";
+
+let man_character3 = new Image();
+man_character3.src = "images/GenericMan3.png";
+
+
 
 let popup_background = new Image();
 popup_background.src = "images/speechBubble.png";
 
+let popup_man_1 = new Image();
+popup_man_1.src = "images/1.png"
+
+//xxxxxx
 /* Direction that the skeleton is walking */
 /* Note that this matches the row in the gameObject image for the given direction */
 const UP = 0;
@@ -53,16 +71,49 @@ const ENEMY_END_THIRD = 21
 const ENEMY_END_FOURTH = 26
 const ENEMY_END_FIFTH = 30
 const POPUP = 31; 
-// 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
-const GENDER = getRndInteger(0,1);
+const POPUP_START = 32;
+const POPUP_END = 40;
+const POPUP_END_WOMAN_LOST = 41;
+
+
 //const GENDER = 0;
 
+// Needed for disappearing popups using the timeout function
+var POPUP_TO_DISSAPEAR;
 
 const UPDATE_TIME = 50
 var CONFIDENCE_LEVEL = 1000;
 
 /******************* END OF Declare game specific data and functions *****************/
 
+function playAnotherGame()
+{
+    gameObjects[BACKGROUND] = new StaticImage(background2, 0, -background.height/4, canvas.width, 1000);
+
+      //go to the bar popup
+      let gttb_popup_x = 200;
+      let gttb_popup_y = 50;
+      gameObjects[POPUP] = new PopUp("Avoid the discriminations!", gttb_popup_x, gttb_popup_y, "Roboto Thin", 18, "White", 20, "green", popup_background, gttb_popup_x-15, gttb_popup_y-25, 130,40, false);
+  
+      
+      let height_placement = 0; 
+      let spread_width = 0;
+      let spread_height = 0;
+      let width_difference = 0;
+      let delay_time = 0;
+
+
+    if(GENDER == 0)
+    {
+        gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
+    }
+    if(GENDER == 1)
+    {
+        gameObjects[SKELETON] = new MazeSkeleton(man_character3, canvas.width/2, canvas.height-30);
+    }
+
+      
+}
 
 /* Always have a playGame() function                                     */
 /* However, the content of this function will be different for each game */
@@ -83,15 +134,16 @@ function playGame()
     console.log(background.height)
     gameObjects[BACKGROUND] = new BackgroundImage(background, 0, -background.height/4, canvas.width, 1000);
     gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
-    gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
-    gameObjects[ANGELA] = new Angela(woman_character, canvas.width + 20, 200);
-   
+    gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "EnergyFont", 30, "RED")
+    gameObjects[ANGELA] = new Angela(angela_character, canvas.width + 20, 200);
+
+    
    // gameObjects[ANGELA_POPUP] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
 
     //go to the bar popup
     let gttb_popup_x = 200;
     let gttb_popup_y = 50;
-    gameObjects[POPUP] = new PopUp("Go to the bar!", gttb_popup_x, gttb_popup_y, "Roboto Thin", 18, "White", 20, "green", popup_background, gttb_popup_x-15, gttb_popup_y-25, 130,40);
+    gameObjects[POPUP] = new PopUp("Go to the bar!", gttb_popup_x, gttb_popup_y, "Roboto Thin", 18, "White", 20, "green", popup_background, gttb_popup_x-15, gttb_popup_y-25, 130,40, false);
 
     
     let height_placement = 0; 
@@ -102,11 +154,26 @@ function playGame()
     
     if(GENDER == 1)
     {
+        gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
         for(let i = ENEMY_START; i < ENEMY_END; i++)
         {
+            let randomMan = getRndInteger(0,2)
+            let manPic = null
+            if(randomMan == 0)
+            {
+                manPic = man_character
+            }
+            if(randomMan == 1)
+            {
+                manPic = man_character2
+            }
+            if(randomMan == 2)
+            {
+                manPic = man_character3
+            }
             let random_width_placement = getRndInteger(0, canvas.width)
             let random_height_placement = getRndInteger(canvas.height/2, canvas.height)
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, random_height_placement, delay_time);
+            gameObjects[i] = new EnemyCharacter(manPic, i, width_difference, random_height_placement, delay_time);
             width_difference += 100;
             if(width_difference>canvas.width)
             {
@@ -117,9 +184,24 @@ function playGame()
 
         for(let i = ENEMY_END; i < ENEMY_END_SECOND; i++)
         {
+            let randomMan = getRndInteger(0,2)
+            let manPic = null
+            if(randomMan == 0)
+            {
+                manPic = man_character
+            }
+            if(randomMan == 1)
+            {
+                manPic = man_character2
+            }
+            if(randomMan == 2)
+            {
+                manPic = man_character3
+            }
+
             let random_width_placement = getRndInteger(0, canvas.width)
             height_placement = 150
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+            gameObjects[i] = new EnemyCharacter(manPic, i, width_difference, height_placement, delay_time);
             width_difference += 150;
             height_placement -= 300;
         
@@ -140,9 +222,25 @@ function playGame()
 
         for(let i = ENEMY_END_SECOND; i < ENEMY_END_THIRD; i++)
         {
+            let randomMan = getRndInteger(0,2)
+            let manPic = null
+            if(randomMan == 0)
+            {
+                manPic = man_character
+            }
+            if(randomMan == 1)
+            {
+                manPic = man_character2
+            }
+            if(randomMan == 2)
+            {
+                manPic = man_character3
+            }
+
+
             let random_width_placement = getRndInteger(0, canvas.width)
             height_placement = 0
-            gameObjects[i] = new EnemyCharacter(man_character, i, width_difference, height_placement, delay_time);
+            gameObjects[i] = new EnemyCharacter(manPic, i, width_difference, height_placement, delay_time);
             width_difference += 50;
             height_placement -= 300;
             delay_time += 2000;
@@ -182,7 +280,7 @@ function playGame()
     }   
     else if(GENDER == 0)
     {
-        
+        gameObjects[SKELETON] = new MazeSkeleton(man_character3, canvas.width/2, canvas.height-30);
         for(let i = ENEMY_START; i < ENEMY_END_FIFTH; i++)
         {
             let width_placement = getRndChoice(getRndInteger(10,250), getRndInteger(300,400));
@@ -191,6 +289,25 @@ function playGame()
             gameObjects[i] = new EnemyCharacter(man_character, i, width_placement, height_placement, 0);
             
         }
+
+        for(let i = POPUP_START+1; i <= POPUP_END; i+= getRndInteger(1,2))
+        {
+            console.log("creating text")
+            let popup_man_x = 200;
+            let popup_man_y = 100;
+            let enemyIndex = i - 24;
+            POPUP_TO_DISSAPEAR = i;
+            console.log(POPUP_TO_DISSAPEAR);
+            gameObjects[i] = new PopUp("", 200, 100+i*10, "Roboto Thin", 18, "White", 20, "green", popup_man_1, popup_man_x, popup_man_y, 100,60, true,enemyIndex);
+            setTimeout('gameObjects[POPUP_TO_DISSAPEAR].changePos(-200,-200, false)', getRndInteger(1500,2000));
+            //gameObjects[POPUP_TO_DISSAPEAR].changeShouldMoveState(false);
+        }
+
+        if(gameObjects[SKELETON].getCentreX() == canvas.width/2 && gameObjects[SKELETON].getCentreY() == 20)
+        {
+            console.log("Game Finished!");
+        }
+
 
 
     }
@@ -230,40 +347,7 @@ function playGame()
         }
     });
 
-    button.addEventListener("click",  function (e) 
-    {
-        let back_pic = document.getElementById("main_image")
-        back_pic.style.visibility = "hidden";
-        console.log(GENDER)
-        if(GENDER == 0)
-        {
-            game = new AvoidMenGame_Man();
-        }
-        else if(GENDER == 1)
-        {
-            game = new AvoidMenGame();
-        }
-        else
-        {
-            game = new AvoidMenGame_Transgender();
-        }
-        //game = new AvoidMenGame()
-        buttonArray = document.getElementsByClassName('buttonClass');
-        
-      
-        for(let i = 0; i<buttonArray.length; i++)
-        {
-            tempStyle = buttonArray[i].style;
-            
-            buttonArray[i].style.visibility = "hidden";
-        }
-        guide_page.style.visibility = "hidden"
-         /* Always play the game */
-        game.start();
-        changeImage(background,"images/nightClubFloor.jpg")
-        //set the dissaperance of the popups
-        setTimeout('gameObjects[POPUP].changePos(-200,-200)', 1000);
-    });
+   
     let isGuidePageVisible = true;
     guide.addEventListener("click",  function (e) 
     {
@@ -275,7 +359,7 @@ function playGame()
         let guide_page = document.getElementById("guide_page");
         //let isGuidePageVisible = true;
         guide_page.style.visibility = "hidden"
-        console.log(guide_page);
+        //console.log(guide_page);
         //console.log("isGuidePageVisible == false?: " + toString(isGuidePageVisible == false))
         console.log(isGuidePageVisible == false)
         
@@ -322,11 +406,18 @@ function playGame()
         }
         
             gameObjects[ANGELA].goToCharacter(true)
-            gameObjects[SKELETON].stop()
+            gameObjects[SKELETON].setDirection(STOPPED)
             gameObjects[BACKGROUND].stop()
             RESCUE_CHARACTER = true
             CONFIDENCE_LEVEL + 10;
 
+    });
+
+
+    let btn_try_again_woman = document.getElementById("btn_try_again_woman");
+    btn_try_again_woman.addEventListener("click",  function (e) 
+    {
+        window.location.reload()    
     });
     
 }

@@ -75,12 +75,12 @@ class EnemyCharacter extends GameObject
             //this.centreY+= getRndInteger(5,10); 
             //console.log("I should be going down");
             //console.log(this.getCentreY());
-            if(this.getCentreY() > canvas.height+50)
-            {
-                this.setCharacterY(-10);
-                this.setCharacterX(getRndChoice(getRndInteger(10,250), getRndInteger(300,400)));
-               // console.log("Putting the character at the top")
-            }
+            // if(this.getCentreY() > canvas.height+50)
+            // {
+            //     this.setCharacterY(-10);
+            //     this.setCharacterX(getRndChoice(getRndInteger(10,250), getRndInteger(300,400)));
+            //    // console.log("Putting the character at the top")
+            // }
             
         }
         else

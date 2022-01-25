@@ -55,6 +55,7 @@ class Angela extends GameObject
         {
             this.centreX+=1
             gameObjects[SKELETON].setDirection(RIGHT)
+            gameObjects[SKELETON].setGoWithAngela(true)
         }
 
        else if(this.come_to_character)
