@@ -79,7 +79,7 @@ class EnemyCharacter extends GameObject
             {
                 this.setCharacterY(-10);
                 this.setCharacterX(getRndChoice(getRndInteger(10,250), getRndInteger(300,400)));
-                console.log("Putting the character at the top")
+               // console.log("Putting the character at the top")
             }
             
         }
