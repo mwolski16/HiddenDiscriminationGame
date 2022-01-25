@@ -38,6 +38,7 @@ popup_background.src = "images/speechBubble.png";
 let popup_man_1 = new Image();
 popup_man_1.src = "images/1.png"
 
+//xxxxxx
 /* Direction that the skeleton is walking */
 /* Note that this matches the row in the gameObject image for the given direction */
 const UP = 0;
