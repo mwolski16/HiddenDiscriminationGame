@@ -54,6 +54,7 @@ class Angela extends GameObject
         if(GO_BACK_RIGHT)
         {
             this.centreX+=1
+            gameObjects[SKELETON].setDirection(RIGHT)
         }
 
        else if(this.come_to_character)
