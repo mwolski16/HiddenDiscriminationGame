@@ -14,13 +14,15 @@ class SchoolGame_Man extends CanvasGame
         this.mazeCtx = mazeOffscreenCanvas.getContext('2d');
         mazeOffscreenCanvas.width = canvas.width;
         mazeOffscreenCanvas.height = canvas.height;
-      
-        
         //this.mazeCtx.drawImage(mazeGridImage, 0, 0, canvas.width, canvas.height);
     }
 
     collisionDetection()
     {
-
+        console.log(gameObjects[CHARACTER].getCentreY())
+        if(gameObjects[CHARACTER].getCentreY() <= 50)
+        {
+            console.log("End game")
+        }
     }
 }
