@@ -68,6 +68,8 @@ const ENEMY_END_FIFTH = 30
 const POPUP = 31; 
 const POPUP_START = 32;
 const POPUP_END = 40;
+const POPUP_END_WOMAN_LOST = 41;
+
 // 0 - Man, 1 - Woman, 2 - Transgender/Queer/etc
 const GENDER = getRndInteger(0,1);
 //const GENDER = 0;
@@ -102,7 +104,8 @@ function playGame()
     gameObjects[SKELETON] = new MazeSkeleton(woman_character, canvas.width/2, canvas.height-30);
     gameObjects[CONFIDENCE_METER] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "EnergyFont", 30, "RED")
     gameObjects[ANGELA] = new Angela(angela_character, canvas.width + 20, 200);
-   
+
+    
    // gameObjects[ANGELA_POPUP] = new ConfidenceMeter("IIIIIIIIII", canvas.width - 100, 30, "Arial", 15, "RED")
 
     //go to the bar popup
@@ -409,6 +412,13 @@ function playGame()
             RESCUE_CHARACTER = true
             CONFIDENCE_LEVEL + 10;
 
+    });
+
+
+    let btn_try_again_woman = document.getElementById("btn_try_again_woman");
+    btn_try_again_woman.addEventListener("click",  function (e) 
+    {
+        window.location.reload()    
     });
     
 }

@@ -18,6 +18,7 @@ class AvoidMenGame extends CanvasGame
         mazeOffscreenCanvas.width = canvas.width;
         mazeOffscreenCanvas.height = canvas.height;
         this.call_for_angela_btn = document.getElementById("btn_angela_call");
+        this.btn_try_again = document.getElementById("btn_try_again_woman");
         console.log(this.call_for_angela_btn)
         this.rescueCharacter = false;
         //this.mazeCtx.drawImage(mazeGridImage, 0, 0, canvas.width, canvas.height);
@@ -30,6 +31,18 @@ class AvoidMenGame extends CanvasGame
         this.rescueCharacter = RESCUE_CHARACTER
 
         
+        if(CONFIDENCE_LEVEL<0)
+        {
+            for(let i = ENEMY_START; i<ENEMY_END_THIRD; i++)
+            {
+                gameObjects[i].stopAndHide()
+            }
+                this.btn_try_again.style.visibility = "visible"   
+                gameObjects[ANGELA].stopAndHide()
+                gameObjects[SKELETON].stopAndHide()
+               
+        }
+
         if(CONFIDENCE_LEVEL<=CALL_FOR_ANGELA_NUMBER && !this.rescueCharacter)
         {
             console.log("END")
